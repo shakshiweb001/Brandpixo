@@ -21,7 +21,7 @@ export default function Portfolio() {
     {
       title: 'Solstice Agency Campaign',
       category: 'Marketing',
-      image: 'https://images.unsplash.com/photo-1542744094-3a31f103e35f?auto=format&fit=crop&w=800&q=80'
+      image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=800&q=80'
     },
     {
       title: 'Equinox Brand Identity',
