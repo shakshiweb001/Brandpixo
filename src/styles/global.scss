@@ -1,0 +1,125 @@
+@import './variables.scss';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background-color: $bg-color;
+  color: $text;
+  font-family: $font-body;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading;
+  font-weight: 500;
+  line-height: 1.1;
+  color: $dark;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// Lenis smooth scroll classes
+html.lenis {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+// Custom Cursor Styles
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid $dark;
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  transition: width 0.2s ease-out, height 0.2s ease-out, background-color 0.2s ease-out, border-color 0.2s ease-out;
+  mix-blend-mode: difference;
+  background-color: transparent;
+
+  &.hovered {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: $primary;
+  }
+}
+
+.custom-cursor-dot {
+  width: 6px;
+  height: 6px;
+  background-color: $primary;
+  border-radius: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.1s ease-out;
+}
+
+// Global Custom Scrollbar
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: $bg-color;
+}
+::-webkit-scrollbar-thumb {
+  background: lighten($muted, 20%);
+  border-radius: 4px;
+  &:hover {
+    background: $muted;
+  }
+}
+
+.magnetic-wrap {
+  display: inline-block;
+  position: relative;
+}
+
+// Dynamic elements
+.gradient-text {
+  background: linear-gradient(135deg, $primary 0%, $hover-accent 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.dark-section {
+  background-color: $dark !important;
+  color: $white !important;
+  h1, h2, h3, h4, h5, h6 {
+    color: $white !important;
+  }
+}
