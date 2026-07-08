@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './Hero.module.scss';
-import ThreeHeroBackground from './ThreeHeroBackground';
+import { AnimatedGridPattern } from './AnimatedGridPattern';
 
 export default function Hero() {
   const containerVariants = {
@@ -31,7 +31,7 @@ export default function Hero() {
   return (
     <section className={styles.hero} id="home">
       <div className={styles.canvasContainer}>
-        <ThreeHeroBackground />
+        <AnimatedGridPattern className={styles.gridPattern} numSquares={40} maxOpacity={0.4} duration={3} />
       </div>
 
       <motion.div
