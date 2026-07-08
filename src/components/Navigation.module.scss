@@ -91,6 +91,89 @@
   }
 }
 
+.menuTrigger {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.2rem;
+}
+
+.megaMenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 750px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.08);
+  border-radius: 24px;
+  padding: 2.5rem;
+  z-index: 200;
+  margin-top: 1rem;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @media (max-width: $tablet) {
+    display: none;
+  }
+}
+
+.megaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.megaCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.megaColTitle {
+  font-family: $font-heading;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: $primary;
+  border-bottom: 1px solid rgba(24, 24, 24, 0.05);
+  padding-bottom: 0.5rem;
+}
+
+.megaColList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.megaItem {
+  font-family: $font-body;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: $muted;
+  transition: all 0.3s ease;
+  display: block;
+
+  &:hover {
+    color: $dark;
+    padding-left: 5px;
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
 .cta {
   background-color: $dark;
   color: $white;

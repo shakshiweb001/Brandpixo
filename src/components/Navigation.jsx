@@ -1,16 +1,78 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './Navigation.module.scss';
+
+function MegaMenu({ setMegaOpen }) {
+  const menuCategories = [
+    {
+      title: 'Development',
+      items: [
+        { name: 'Custom Website Development', id: 'custom-website' },
+        { name: 'WordPress Development', id: 'wordpress' },
+        { name: 'Landing Page Development', id: 'landing-page' },
+        { name: 'Shopify Development', id: 'shopify' }
+      ]
+    },
+    {
+      title: 'Design',
+      items: [
+        { name: 'UI/UX Design', id: 'ui-ux' },
+        { name: 'Graphic Design', id: 'graphic-design' },
+        { name: 'Brand Identity Design', id: 'brand-identity' }
+      ]
+    },
+    {
+      title: 'Marketing',
+      items: [
+        { name: 'SEO Optimization', id: 'seo' },
+        { name: 'Social Media Marketing', id: 'social-media' },
+        { name: 'Performance Marketing', id: 'performance-marketing' }
+      ]
+    }
+  ];
+
+  return (
+    <div 
+      className={styles.megaMenu}
+      onMouseEnter={() => setMegaOpen(true)}
+      onMouseLeave={() => setMegaOpen(false)}
+    >
+      <div className={styles.megaGrid}>
+        {menuCategories.map((cat, idx) => (
+          <div key={idx} className={styles.megaCol}>
+            <h4 className={styles.megaColTitle}>{cat.title}</h4>
+            <ul className={styles.megaColList}>
+              {cat.items.map((item) => (
+                <li key={item.id}>
+                  <Link 
+                    to={`/services/${item.id}`} 
+                    className={`${styles.megaItem} hover-target`}
+                    onClick={() => setMegaOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [darkActive, setDarkActive] = useState(false);
+  const [megaOpen, setMegaOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      // Detect if we are scrolling over a dark section
+      // Detect dark section overlays
       const darkSections = document.querySelectorAll('.dark-section');
       let isDarkActive = false;
       darkSections.forEach(section => {
@@ -26,24 +88,44 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navigateToSection = (sectionId) => {
+    if (window.location.pathname !== '/') {
+      navigate(`/#${sectionId}`);
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const handleCtaClick = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    navigateToSection('contact');
   };
 
   const navClass = `${styles.nav} ${scrolled ? styles.scrolled : ''} ${darkActive ? styles.darkSectionActive : ''}`;
 
   return (
     <nav className={navClass}>
-      <div className={styles.logo} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+      <div className={styles.logo} onClick={() => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
         BrandPixo
       </div>
       
       <div className={styles.links}>
-        <a href="#about" className={styles.link}>About</a>
-        <a href="#services" className={styles.link}>Services</a>
-        <a href="#process" className={styles.link}>Process</a>
-        <a href="#portfolio" className={styles.link}>Portfolio</a>
-        <a href="#contact" className={styles.link}>Contact</a>
+        <span onClick={() => navigateToSection('about')} className={styles.link}>About</span>
+        
+        <div 
+          className={styles.menuTrigger}
+          onMouseEnter={() => setMegaOpen(true)}
+          onMouseLeave={() => setMegaOpen(false)}
+        >
+          <Link to="/services" className={styles.link}>Services</Link>
+          {megaOpen && <MegaMenu setMegaOpen={setMegaOpen} />}
+        </div>
+
+        <span onClick={() => navigateToSection('process')} className={styles.link}>Process</span>
+        <span onClick={() => navigateToSection('portfolio')} className={styles.link}>Portfolio</span>
+        <span onClick={() => navigateToSection('contact')} className={styles.link}>Contact</span>
         <button onClick={handleCtaClick} className={`${styles.cta} magnetic-button`}>
           Start Project
         </button>
@@ -59,11 +141,11 @@ export default function Navigation() {
       </button>
 
       <div className={`${styles.mobileMenu} ${mobileOpen ? styles.open : ''}`}>
-        <a href="#about" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>About</a>
-        <a href="#services" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Services</a>
-        <a href="#process" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Process</a>
-        <a href="#portfolio" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Portfolio</a>
-        <a href="#contact" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Contact</a>
+        <span className={styles.mobileLink} onClick={() => { navigateToSection('about'); setMobileOpen(false); }}>About</span>
+        <Link to="/services" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Services</Link>
+        <span className={styles.mobileLink} onClick={() => { navigateToSection('process'); setMobileOpen(false); }}>Process</span>
+        <span className={styles.mobileLink} onClick={() => { navigateToSection('portfolio'); setMobileOpen(false); }}>Portfolio</span>
+        <span className={styles.mobileLink} onClick={() => { navigateToSection('contact'); setMobileOpen(false); }}>Contact</span>
       </div>
     </nav>
   );

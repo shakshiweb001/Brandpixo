@@ -1,0 +1,142 @@
+@import '../styles/variables.scss';
+
+.page {
+  padding-top: 8rem;
+  background-color: $bg-color;
+  min-height: 100vh;
+}
+
+.hero {
+  padding: 6rem 4rem;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+
+  @media (max-width: $tablet) {
+    padding: 4rem 2rem;
+  }
+}
+
+.tag {
+  font-family: $font-body;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: $primary;
+}
+
+.title {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 700;
+  color: $dark;
+  line-height: 1.1;
+  letter-spacing: -2px;
+}
+
+.desc {
+  font-size: 1.25rem;
+  color: $muted;
+  max-width: 600px;
+}
+
+.grid {
+  padding: 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+
+  @media (max-width: $tablet) {
+    padding: 2rem;
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 3.5rem 2.5rem;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.01);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, $primary 0%, $hover-accent 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 35px 70px rgba(250, 172, 92, 0.08);
+    border-color: $primary;
+
+    &::before {
+      transform: scaleX(1);
+    }
+
+    .arrow {
+      transform: translateX(8px);
+    }
+  }
+}
+
+.cardCategory {
+  font-family: $font-body;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: $primary;
+}
+
+.cardTitle {
+  font-family: $font-heading;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: $dark;
+}
+
+.cardDesc {
+  font-size: 0.95rem;
+  color: $muted;
+  line-height: 1.6;
+}
+
+.cardLink {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: $dark;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  .arrow {
+    transition: transform 0.3s ease;
+    color: $primary;
+  }
+}

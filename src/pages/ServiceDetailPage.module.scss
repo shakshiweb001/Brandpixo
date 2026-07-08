@@ -1,0 +1,291 @@
+@import '../styles/variables.scss';
+
+.page {
+  padding-top: 8rem;
+  background-color: $bg-color;
+  min-height: 100vh;
+}
+
+// 1. Hero
+.hero {
+  padding: 6rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+
+  @media (max-width: $desktop) {
+    grid-template-columns: 1fr;
+    padding: 4rem 2rem;
+  }
+}
+
+.breadcrumbs {
+  font-size: 0.9rem;
+  color: $muted;
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  a {
+    color: $muted;
+    transition: color 0.3s ease;
+    &:hover { color: $primary; }
+  }
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 5vw, 4.2rem);
+  font-weight: 700;
+  color: $dark;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+}
+
+.heroImageWrap {
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.06);
+  height: 450px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+// 2. About
+.aboutSection {
+  padding: 8rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+
+  @media (max-width: $desktop) {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    padding: 6rem 2rem;
+  }
+}
+
+.aboutCard {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 3rem;
+  border-radius: 30px;
+}
+
+// 3. Why Choose
+.whySection {
+  padding: 8rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.whyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-top: 4rem;
+}
+
+.whyCard {
+  background: $white;
+  border: 1px solid $border;
+  padding: 3rem 2.5rem;
+  border-radius: 24px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: $primary;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+  }
+}
+
+// 4. Process
+.processSection {
+  padding: 8rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.processList {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 4rem;
+}
+
+.processItem {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  border-bottom: 1px solid $border;
+  padding-bottom: 2.5rem;
+}
+
+.processNum {
+  font-family: $font-heading;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $primary;
+}
+
+// 5. Benefits
+.benefitsSection {
+  padding: 8rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
+  margin-top: 4rem;
+}
+
+.benefitCard {
+  background: $white;
+  border: 1px solid $border;
+  padding: 3rem;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+// 6. Portfolio
+.portfolioSection {
+  padding: 8rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.portfolioGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  margin-top: 4rem;
+
+  @media (max-width: $tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.portfolioCard {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.02);
+  img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+  }
+}
+
+// 7. Technologies
+.techSection {
+  padding: 6rem 0;
+  background-color: $dark;
+  color: $white;
+  overflow: hidden;
+}
+
+.techTitle {
+  text-align: center;
+  color: $white !important;
+  margin-bottom: 3rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.marqueeContainer {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee {
+  display: flex;
+  gap: 4rem;
+  white-space: nowrap;
+  animation: scrollMarquee 20s linear infinite;
+  font-family: $font-heading;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $white;
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+// 8. Testimonials
+.testimonialsSection {
+  padding: 8rem 4rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.testCard {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 3rem;
+  border-radius: 24px;
+  text-align: center;
+  margin-top: 4rem;
+}
+
+// 9. FAQ
+.faqSection {
+  padding: 8rem 4rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+// 10. Contact CTA
+.contactCta {
+  background-color: $dark;
+  color: $white;
+  padding: 8rem 4rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  h2 {
+    color: $white !important;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    max-width: 800px;
+  }
+}
+
+.btnPrimary {
+  background: linear-gradient(135deg, $primary 0%, $hover-accent 100%);
+  color: $white;
+  border: none;
+  padding: 1.2rem 3rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(250, 172, 92, 0.2);
+}
+
+.sectionTitle {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: $dark;
+  text-align: center;
+}

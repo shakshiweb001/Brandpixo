@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import useSmoothScroll from './hooks/useSmoothScroll';
 import CustomCursor from './components/CustomCursor';
 import Navigation from './components/Navigation';
@@ -15,14 +16,13 @@ import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
-function App() {
-  // Initialize Lenis Smooth Scroll
-  useSmoothScroll();
+// Pages
+import ServicesPage from './pages/ServicesPage';
+import ServiceDetailPage from './pages/ServiceDetailPage';
 
+function Home() {
   return (
     <>
-      <CustomCursor />
-      <Navigation />
       <Hero />
       <About />
       <Services />
@@ -34,8 +34,25 @@ function App() {
       <Pricing />
       <FAQ />
       <Contact />
-      <Footer />
     </>
+  );
+}
+
+function App() {
+  // Initialize Lenis Smooth Scroll
+  useSmoothScroll();
+
+  return (
+    <BrowserRouter>
+      <CustomCursor />
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/services/:serviceId" element={<ServiceDetailPage />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
   );
 }
 
