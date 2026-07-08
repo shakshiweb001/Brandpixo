@@ -1,16 +1,9 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import styles from './Testimonials.module.scss';
 
 export default function Testimonials() {
-  const [width, setWidth] = useState(0);
-  const trackRef = useRef(null);
-
-  useEffect(() => {
-    if (trackRef.current) {
-      setWidth(trackRef.current.scrollWidth - trackRef.current.offsetWidth);
-    }
-  }, []);
+  const [index, setIndex] = useState(0);
 
   const testimonialsData = [
     {
@@ -33,6 +26,13 @@ export default function Testimonials() {
     }
   ];
 
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % testimonialsData.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [testimonialsData.length]);
+
   return (
     <section className={styles.testimonials} id="testimonials">
       <div className={styles.header}>
@@ -42,27 +42,36 @@ export default function Testimonials() {
 
       <div className={styles.carouselContainer}>
         <motion.div 
-          ref={trackRef} 
           className={styles.carouselTrack}
-          drag="x"
-          dragConstraints={{ right: 0, left: -width }}
+          animate={{ x: `-${index * 100}%` }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          {testimonialsData.map((test, index) => (
-            <motion.div 
-              key={index}
-              className={styles.card}
-            >
-              <p className={styles.quote}>"{test.quote}"</p>
-              <div className={styles.profile}>
-                <img src={test.avatar} alt={test.name} className={styles.avatar} loading="lazy" />
-                <div className={styles.info}>
-                  <span className={styles.name}>{test.name}</span>
-                  <span className={styles.role}>{test.role}</span>
+          {testimonialsData.map((test, idx) => (
+            <div key={idx} className={styles.slide}>
+              <div className={styles.card}>
+                <p className={styles.quote}>"{test.quote}"</p>
+                <div className={styles.profile}>
+                  <img src={test.avatar} alt={test.name} className={styles.avatar} loading="lazy" />
+                  <div className={styles.info}>
+                    <span className={styles.name}>{test.name}</span>
+                    <span className={styles.role}>{test.role}</span>
+                  </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </motion.div>
+
+        <div className={styles.dots}>
+          {testimonialsData.map((_, idx) => (
+            <button
+              key={idx}
+              className={`${styles.dot} ${index === idx ? styles.activeDot : ''} hover-target`}
+              onClick={() => setIndex(idx)}
+              aria-label={`Slide ${idx + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

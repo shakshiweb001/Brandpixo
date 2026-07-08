@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Navigation.module.scss';
+import logo from '../assets/logo.svg';
 
 function MegaMenu({ setMegaOpen }) {
   const menuCategories = [
@@ -108,7 +109,7 @@ export default function Navigation() {
   return (
     <nav className={navClass}>
       <div className={styles.logo} onClick={() => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-        BrandPixo
+        <img src={logo} alt="BrandPixo" />
       </div>
       
       <div className={styles.links}>
