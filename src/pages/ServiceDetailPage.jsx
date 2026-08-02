@@ -157,7 +157,7 @@ export default function ServiceDetailPage() {
 
         <div className={styles.processVisual}>
           <img src={service.portfolio[0]?.image || service.heroImage} alt="Our creative process" />
-          <div><button aria-label="View our work" onClick={() => navigate('/portfolio')}><FiPlay /></button><h3>See thoughtful craft<br />behind our digital work.</h3></div>
+          <div><button aria-label="Start a project" onClick={() => navigate('/contact')}><FiPlay /></button><h3>See thoughtful craft<br />behind our digital work.</h3></div>
         </div>
       </section>
 

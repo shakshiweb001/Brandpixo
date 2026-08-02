@@ -39,6 +39,7 @@ export default function BlogDetailPage() {
     .filter(Boolean);
   const imageOne = relatedPosts[0]?.image || post.image;
   const imageTwo = relatedPosts[1]?.image || post.image;
+  const relatedRail = blogPosts.filter((item) => item.slug !== post.slug).slice(0, 4);
 
   return (
     <main className={styles.page}>
@@ -62,13 +63,27 @@ export default function BlogDetailPage() {
       </header>
 
       <article className={styles.article}>
-        <div className={styles.openingGrid}>
-          <aside className={styles.contents}>
-            <span>In this guide</span>
-            {post.sections.map((section, index) => <a href={`#section-${index + 1}`} key={section.title}>0{index + 1} · {section.title}</a>)}
-          </aside>
-          <p className={styles.lead}>{post.excerpt}</p>
-        </div>
+        <aside className={styles.relatedRail} aria-label="Related blogs">
+          <div className={styles.relatedRailInner}>
+            <span className={styles.relatedLabel}>Keep reading</span>
+            <h2>Related blogs</h2>
+            <div className={styles.relatedList}>
+              {relatedRail.map((item, index) => (
+                <Link key={item.slug} to={`/blog/${item.slug}`} className={styles.relatedCard}>
+                  <img src={item.image} alt="" loading="lazy" />
+                  <div>
+                    <span>0{index + 1} / {item.category}</span>
+                    <h3>{item.title}</h3>
+                    <small>{item.readTime} <FiArrowUpRight /></small>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </aside>
+
+        <div className={styles.articleContent}>
+        <div className={styles.openingGrid}><p className={styles.lead}>{post.excerpt}</p></div>
 
         {post.sections.map((section, index) => (
           <React.Fragment key={section.title}>
@@ -117,6 +132,7 @@ export default function BlogDetailPage() {
           <Link to={`/blog/${previousPost.slug}`}><span><FiArrowLeft /> Previous</span><strong>{previousPost.title}</strong></Link>
           <Link to={`/blog/${nextPost.slug}`}><span>Next <FiArrowRight /></span><strong>{nextPost.title}</strong></Link>
         </nav>
+        </div>
       </article>
     </main>
   );

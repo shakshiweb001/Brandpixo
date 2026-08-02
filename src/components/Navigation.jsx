@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { FiArrowRight, FiCheckCircle, FiMail, FiPhone, FiX } from 'react-icons/fi';
 import styles from './Navigation.module.scss';
-import logo from '../assets/brandpixo-logo.png';
+import logo from '../assets/logo.svg';
+import darkLogo from '../assets/logo-dark.svg';
 
 function MegaMenu({ setMegaOpen }) {
   const menuCategories = [
@@ -38,10 +40,14 @@ function MegaMenu({ setMegaOpen }) {
       onMouseEnter={() => setMegaOpen(true)}
       onMouseLeave={() => setMegaOpen(false)}
     >
+      <div className={styles.megaHeader}>
+        <div><span>BrandPixo capabilities</span><strong>Choose what you want to build.</strong></div>
+        <Link to="/services" onClick={() => setMegaOpen(false)}>View all services</Link>
+      </div>
       <div className={styles.megaGrid}>
         {menuCategories.map((cat, idx) => (
           <div key={idx} className={styles.megaCol}>
-            <h4 className={styles.megaColTitle}>{cat.title}</h4>
+            <h4 className={styles.megaColTitle}><span>0{idx + 1}</span>{cat.title}</h4>
             <ul className={styles.megaColList}>
               {cat.items.map((item) => (
                 <li key={item.id}>
@@ -50,7 +56,7 @@ function MegaMenu({ setMegaOpen }) {
                     className={`${styles.megaItem} hover-target`}
                     onClick={() => setMegaOpen(false)}
                   >
-                    {item.name}
+                    <span>{item.name}</span><span>↗</span>
                   </Link>
                 </li>
               ))}
@@ -67,6 +73,8 @@ export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [darkActive, setDarkActive] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
+  const [projectOpen, setProjectOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -89,16 +97,27 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (!projectOpen) return undefined;
+    const handleKey = (event) => { if (event.key === 'Escape') setProjectOpen(false); };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', handleKey);
+    return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', handleKey); };
+  }, [projectOpen]);
+
   const handleCtaClick = () => {
-    navigate('/contact');
+    setMobileOpen(false);
+    setSubmitted(false);
+    setProjectOpen(true);
   };
 
-  const navClass = `${styles.nav} ${scrolled ? styles.scrolled : ''} ${darkActive ? styles.darkSectionActive : ''}`;
+  const navClass = `${styles.nav} ${scrolled ? styles.scrolled : ''} ${darkActive ? styles.darkSectionActive : ''} ${mobileOpen ? styles.mobileNavOpen : ''}`;
 
   return (
     <nav className={navClass}>
       <div className={styles.logo} onClick={() => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-        <img src={logo} alt="BrandPixo" />
+        <img src={logo} alt="BrandPixo" className={styles.lightLogo} />
+        <img src={darkLogo} alt="" aria-hidden="true" className={styles.darkLogo} />
       </div>
       
       <div className={styles.links}>
@@ -113,7 +132,6 @@ export default function Navigation() {
           {megaOpen && <MegaMenu setMegaOpen={setMegaOpen} />}
         </div>
 
-        <Link to="/portfolio" className={styles.link}>Portfolio</Link>
         <Link to="/blog" className={styles.link}>Blog</Link>
         <Link to="/contact" className={styles.link}>Contact</Link>
         <button onClick={handleCtaClick} className={`${styles.cta} magnetic-button`}>
@@ -136,10 +154,32 @@ export default function Navigation() {
       <div id="mobile-navigation" className={`${styles.mobileMenu} ${mobileOpen ? styles.open : ''}`}>
         <Link to="/about" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>About</Link>
         <Link to="/services" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Services</Link>
-        <Link to="/portfolio" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Portfolio</Link>
         <Link to="/blog" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Blog</Link>
         <Link to="/contact" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Contact</Link>
+        <button className={styles.mobileProject} onClick={handleCtaClick}>Start Project</button>
       </div>
+
+      {projectOpen && (
+        <div className={styles.modalOverlay} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setProjectOpen(false); }}>
+          <section className={styles.projectModal} role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+            <button className={styles.modalClose} onClick={() => setProjectOpen(false)} aria-label="Close project enquiry"><FiX /></button>
+            {!submitted ? (
+              <>
+                <div className={styles.modalIntro}><span>Start a project</span><h2 id="project-modal-title">Tell us what you’re ready to build.</h2><p>A few useful details are enough. Our team will reply with a clear next step within one business day.</p><div><a href="mailto:hello@brandpixo.com"><FiMail /> hello@brandpixo.com</a><a href="tel:+15550192834"><FiPhone /> +1 (555) 019-2834</a></div></div>
+                <form className={styles.modalForm} onSubmit={(event) => { event.preventDefault(); setSubmitted(true); }}>
+                  <label>Name<input name="name" placeholder="Your name" required autoFocus /></label>
+                  <label>Email<input name="email" type="email" placeholder="you@company.com" required /></label>
+                  <label>What do you need?<select name="service" defaultValue=""><option value="" disabled>Select a service</option><option>Website design & development</option><option>Brand identity</option><option>UI/UX design</option><option>Digital marketing</option></select></label>
+                  <label>Project details<textarea name="message" placeholder="Goals, timeline, and anything useful to know…" required /></label>
+                  <button type="submit">Send project brief <FiArrowRight /></button>
+                </form>
+              </>
+            ) : (
+              <div className={styles.modalSuccess}><FiCheckCircle /><span>Brief received</span><h2>Thank you. We’ll be in touch shortly.</h2><p>A BrandPixo strategist will review your details and reply within one business day.</p><button onClick={() => setProjectOpen(false)}>Close</button></div>
+            )}
+          </section>
+        </div>
+      )}
     </nav>
   );
 }

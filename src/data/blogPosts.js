@@ -76,6 +76,32 @@ export const blogPosts = [
     ],
     pullQuote: 'Good conversion design respects the buyer’s pace while removing every unnecessary question.',
     related: ['premium-websites-create-trust', 'quiet-design-rules-luxury-brands']
+  },
+  {
+    slug: 'brand-consistency-builds-recognition',
+    title: 'How brand consistency turns attention into recognition',
+    category: 'Brand Identity',
+    readTime: '5 min read',
+    date: 'Insight 04',
+    image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=1400&q=85',
+    excerpt: 'Consistent visual and verbal choices help audiences recognise a brand faster and trust it for longer.',
+    intro: 'Recognition is built through repetition with purpose: the same point of view expressed clearly across every meaningful touchpoint.',
+    sections: [
+      {
+        title: 'Create a recognisable rhythm',
+        body: 'Typography, colour, imagery, and spacing should work together as a repeatable system. Familiar patterns make every new interaction feel unmistakably connected to the brand.'
+      },
+      {
+        title: 'Keep the voice aligned',
+        body: 'A consistent tone helps a business sound confident across websites, campaigns, proposals, and social content without becoming repetitive.'
+      },
+      {
+        title: 'Protect the essential details',
+        body: 'Simple brand guidelines give teams enough structure to create quickly while preserving the signals customers already recognise and trust.'
+      }
+    ],
+    pullQuote: 'Consistency is not sameness. It is a clear idea expressed with discipline.',
+    related: ['premium-websites-create-trust', 'quiet-design-rules-luxury-brands', 'conversion-architecture-service-brands']
   }
 ];
 

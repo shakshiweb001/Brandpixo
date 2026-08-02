@@ -3,7 +3,7 @@
 .page { min-height: 100vh; padding: 8rem 4rem 6rem; background: $bg-color; color: $text; }
 .hero { position: relative; isolation: isolate; width: min(1400px, 100%); min-height: 360px; margin: 1.5rem auto 0; padding: 5rem 2rem; border-radius: 26px; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1.3rem; text-align: center; background: #171614; color: $white; box-shadow: 0 40px 100px rgba(24,24,24,.16); }
 .hero::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(135deg, rgba(255,255,255,.045), transparent 48%); }
-.hero h1 { max-width: 1120px; font-size: clamp(3rem, 7vw, 6rem); line-height: 1; letter-spacing: -.04em; font-weight: 700; }
+.hero h1 { max-width: 1120px; color: $white; font-size: clamp(3rem, 7vw, 6rem); line-height: 1; letter-spacing: -.04em; font-weight: 700; }
 .eyebrow { color: $primary; font-size: .76rem; font-weight: 850; letter-spacing: .22rem; text-transform: uppercase; }
 .heroFooter { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; }
 .heroFooter p { max-width: 580px; color: rgba(255,255,255,.64); font-size: 1.08rem; line-height: 1.75; }
