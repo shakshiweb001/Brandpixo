@@ -1,0 +1,17 @@
+{
+  "name": "BrandPixo",
+  "short_name": "BrandPixo",
+  "description": "Premium creative digital agency for websites, branding, UI/UX, SEO, and digital marketing.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7F5F2",
+  "theme_color": "#FAAC5C",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
