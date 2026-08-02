@@ -22,14 +22,14 @@ export default function ContactPage() {
     <main className={styles.page}>
       <section className={styles.hero}>
         <div className={styles.breadcrumbs}><Link to="/">Home</Link><span>/</span><strong>Contact us</strong></div>
-        <h1>Contact our Chandigarh digital agency.<br /><mark>We’ll shape what’s next.</mark></h1>
+        <h1>Contact our digital agency.<br /><mark>We’ll shape what’s next.</mark></h1>
         <div className={styles.heroBottom}><span>“</span><div><h2>Big projects can feel complex.<br />Starting shouldn’t.</h2><p>Share what you are building and we’ll suggest a clear, practical next step—without pressure.</p></div></div>
       </section>
 
       <section className={styles.contactCards}>
         <a href="https://wa.me/919805312402" target="_blank" rel="noreferrer"><FaWhatsapp /><FiArrowUpRight /><span>WhatsApp our team</span><strong>+91 98053 12402</strong><small>Chat directly with a strategist.</small></a>
         <a href="mailto:brandpixo@gmail.com"><FiMail /><FiArrowUpRight /><span>Email us</span><strong>brandpixo@gmail.com</strong><small>Send project details or attach a brief.</small></a>
-        <div><FiMapPin /><FiArrowUpRight /><span>Studio</span><strong>Chandigarh, India</strong><small>Working with ambitious brands across India.</small></div>
+        <div><FiMapPin /><FiArrowUpRight /><span>Service area</span><strong>India</strong><small>Working with ambitious brands across India.</small></div>
       </section>
 
       <section className={styles.enquirySection}>

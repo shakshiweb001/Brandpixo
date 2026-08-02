@@ -57,7 +57,7 @@ export default function BlogDetailPage() {
         </motion.div>
         <motion.figure className={styles.heroPhoto} initial={{ opacity: 0, y: 34, rotate: -1 }} animate={{ opacity: 1, y: 0, rotate: 0 }} transition={{ duration: .85, ease: [0.16, 1, 0.3, 1] }}>
           <span className={styles.tape} />
-          <img src={post.image} alt={`${post.title} — BrandPixo Chandigarh agency journal`} fetchPriority="high" />
+          <img src={post.image} alt={`${post.title} — BrandPixo agency journal`} fetchPriority="high" />
           <figcaption>BrandPixo Journal — {post.category}</figcaption>
         </motion.figure>
       </header>

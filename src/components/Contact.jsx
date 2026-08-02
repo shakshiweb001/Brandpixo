@@ -36,7 +36,7 @@ export default function Contact() {
           </div>
           <div className={styles.infoItem}>
             <span className={styles.label}>Main Headquarters</span>
-            <span className={styles.val}>Chandigarh, India</span>
+            <span className={styles.val}>India</span>
           </div>
         </div>
       </div>

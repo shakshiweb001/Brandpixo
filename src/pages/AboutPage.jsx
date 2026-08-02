@@ -19,14 +19,14 @@ export default function AboutPage() {
         <div className={styles.breadcrumbs}><Link to="/">Home</Link><span>/</span><strong>About us</strong></div>
         <motion.div initial="hidden" animate="visible" variants={fadeUp}>
           <span>Independent digital studio</span>
-          <h1>Chandigarh digital agency.<br /><mark>Serious about impact.</mark></h1>
+          <h1>A digital agency.<br /><mark>Serious about impact.</mark></h1>
         </motion.div>
         <div className={styles.heroBottom}><p>BrandPixo brings strategy, design, development, and growth thinking together for brands ready to show up with greater clarity.</p><div className={styles.iconStack} aria-hidden="true"><span><FiTarget /></span><span><FiLayers /></span><span><FiFeather /></span></div></div>
       </section>
 
       <section className={styles.story}>
         <div className={styles.photoCollage}>
-          <figure><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=85" alt="BrandPixo digital marketing team collaborating in Chandigarh" loading="lazy" /><figcaption>Thoughtful collaboration, without unnecessary layers.</figcaption></figure>
+          <figure><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=85" alt="BrandPixo digital marketing team collaborating" loading="lazy" /><figcaption>Thoughtful collaboration, without unnecessary layers.</figcaption></figure>
           <figure><img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=700&q=85" alt="BrandPixo team discussing a digital strategy" loading="lazy" /></figure>
         </div>
         <div className={styles.storyCopy}><span>Our story</span><h2>Built for brands that have outgrown ordinary.</h2><p>We created BrandPixo to close the gap between beautiful creative work and practical business outcomes. That means positioning with substance, interfaces people understand, and technology that performs quietly in the background.</p><p>Our approach stays collaborative and direct. You work with the people shaping the strategy and making the work—not layers of account management.</p><Link to="/contact">Start a conversation <FiArrowUpRight /></Link></div>

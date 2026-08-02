@@ -8,7 +8,7 @@ export default function NotFoundPage() {
     <main className={styles.page}>
       <span>404 / Page not found</span>
       <h1>This BrandPixo page doesn’t exist.</h1>
-      <p>Return home or explore our digital marketing services in Chandigarh.</p>
+      <p>Return home or explore our digital marketing and branding services.</p>
       <div>
         <Link to="/">Return home <FiArrowRight /></Link>
         <Link to="/services">Explore digital marketing services</Link>

@@ -64,7 +64,7 @@ export default function ServiceDetailPage() {
       <section className={styles.titleBanner}>
         <motion.div initial="hidden" animate="visible" variants={fadeUp}>
           <span className={styles.kicker}>BrandPixo / Services</span>
-          <h1>{service.title} in Chandigarh</h1>
+          <h1>{service.title} Services</h1>
           <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
             <Link to="/">Home</Link><span>/</span><Link to="/services">Services</Link><span>/</span><strong>{service.title}</strong>
           </nav>
@@ -74,7 +74,7 @@ export default function ServiceDetailPage() {
       <section className={styles.detailLayout}>
         <div className={styles.mainColumn}>
           <motion.div className={styles.heroMedia} initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75 }}>
-            <img src={service.heroImage} alt={`${service.title} services by BrandPixo in Chandigarh`} fetchPriority="high" />
+            <img src={service.heroImage} alt={`${service.title} services by BrandPixo`} fetchPriority="high" />
             <span>{service.category}</span>
           </motion.div>
 

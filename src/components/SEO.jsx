@@ -13,24 +13,24 @@ const SOCIALS = ['https://www.instagram.com/', 'https://www.facebook.com/'];
 
 const staticMeta = {
   '/': {
-    title: 'BrandPixo | Digital Marketing Agency Chandigarh',
-    description: 'BrandPixo is a digital marketing agency in Chandigarh offering SEO, social media, branding, web design and performance marketing.'
+    title: 'BrandPixo | Digital Marketing & Branding Agency',
+    description: 'BrandPixo is a digital marketing and branding agency offering SEO, social media marketing, web design and performance campaigns.'
   },
   '/about': {
-    title: 'About BrandPixo | Digital Agency Chandigarh',
-    description: 'Meet BrandPixo, a Chandigarh digital agency combining brand strategy, web design, SEO and marketing to help ambitious businesses grow.'
+    title: 'About BrandPixo | Digital Marketing Agency',
+    description: 'Meet BrandPixo, a digital agency combining brand strategy, web design, SEO and performance marketing to help ambitious businesses grow.'
   },
   '/services': {
-    title: 'Digital Marketing Services Chandigarh | BrandPixo',
-    description: 'Explore BrandPixo services in Chandigarh: SEO, social media marketing, performance campaigns, branding, UI/UX and website development.'
+    title: 'Digital Marketing Services | BrandPixo',
+    description: 'Explore BrandPixo services: SEO, social media marketing, performance campaigns, branding, UI/UX and custom website development.'
   },
   '/blog': {
-    title: 'Digital Marketing Insights Chandigarh | BrandPixo',
+    title: 'Digital Marketing Insights | BrandPixo',
     description: 'Read BrandPixo insights on SEO, branding, conversion, website design and digital marketing strategy for growing businesses.'
   },
   '/contact': {
-    title: 'Contact Digital Agency Chandigarh | BrandPixo',
-    description: 'Contact BrandPixo in Chandigarh for SEO, social media, branding, web design and performance marketing. Start your project on WhatsApp.'
+    title: 'Contact BrandPixo | Digital Marketing Agency',
+    description: 'Contact BrandPixo for SEO, social media marketing, branding, web design and performance campaigns. Start your project on WhatsApp.'
   }
 };
 
@@ -43,8 +43,8 @@ const routeDetails = (pathname) => {
     const id = pathname.slice('/services/'.length);
     const service = servicesData[id];
     if (service) return {
-      title: titleWithBrand(`${service.title} Chandigarh`),
-      description: truncate(`${service.tagline} BrandPixo provides ${service.title.toLowerCase()} for businesses in Chandigarh and across India.`, 155),
+      title: titleWithBrand(`${service.title} Services`),
+      description: truncate(`${service.tagline} BrandPixo provides professional ${service.title.toLowerCase()} for ambitious businesses across India.`, 155),
       image: service.heroImage,
       type: 'website',
       service,
@@ -76,7 +76,7 @@ const routeDetails = (pathname) => {
 
   return {
     title: 'Page Not Found | BrandPixo',
-    description: 'The requested BrandPixo page could not be found. Explore our digital marketing, branding and website services in Chandigarh.',
+    description: 'The requested BrandPixo page could not be found. Explore our digital marketing, branding and professional website services.',
     image: SHARE_IMAGE,
     type: 'website',
     noindex: true,
@@ -106,7 +106,7 @@ export default function SEO() {
     '@type': ['Organization', 'ProfessionalService'],
     '@id': `${SITE_URL}/#organization`,
     name: SITE_NAME,
-    description: 'Digital marketing agency in Chandigarh offering SEO, social media marketing, branding, web design and performance marketing.',
+    description: 'Digital marketing and branding agency offering SEO, social media marketing, web design and performance campaigns.',
     url: SITE_URL,
     logo: { '@type': 'ImageObject', url: SHARE_IMAGE },
     email: EMAIL,
@@ -114,8 +114,6 @@ export default function SEO() {
     sameAs: SOCIALS,
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Chandigarh',
-      addressRegion: 'Punjab',
       addressCountry: 'IN'
     }
   };
@@ -132,11 +130,9 @@ export default function SEO() {
     priceRange: '$$',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Chandigarh',
-      addressRegion: 'Punjab',
       addressCountry: 'India'
     },
-    areaServed: ['Chandigarh', 'Punjab', 'India']
+    areaServed: 'India'
   };
 
   const pageSchema = meta.post ? {
@@ -154,7 +150,7 @@ export default function SEO() {
     name: meta.service.title,
     description: meta.description,
     serviceType: meta.service.category,
-    areaServed: { '@type': 'City', name: 'Chandigarh' },
+    areaServed: { '@type': 'Country', name: 'India' },
     provider: { '@id': `${SITE_URL}/#organization` },
     url: canonical
   } : {
@@ -173,7 +169,7 @@ export default function SEO() {
       name: service.title,
       description: service.aboutText,
       serviceType: service.category,
-      areaServed: { '@type': 'City', name: 'Chandigarh' },
+      areaServed: { '@type': 'Country', name: 'India' },
       provider: { '@id': `${SITE_URL}/#organization` },
       url: `${SITE_URL}/services/${id}`
     }))
@@ -192,7 +188,7 @@ export default function SEO() {
       <meta property="og:title" content={meta.title} />
       <meta property="og:description" content={meta.description} />
       <meta property="og:image" content={meta.image || SHARE_IMAGE} />
-      <meta property="og:image:alt" content="BrandPixo digital marketing agency in Chandigarh" />
+      <meta property="og:image:alt" content="BrandPixo digital marketing and branding agency" />
       <meta property="og:url" content={canonical} />
       <meta property="og:type" content={meta.type} />
       <meta property="og:locale" content="en_IN" />
@@ -201,7 +197,7 @@ export default function SEO() {
       <meta name="twitter:title" content={meta.title} />
       <meta name="twitter:description" content={meta.description} />
       <meta name="twitter:image" content={meta.image || SHARE_IMAGE} />
-      <meta name="twitter:image:alt" content="BrandPixo digital marketing agency in Chandigarh" />
+      <meta name="twitter:image:alt" content="BrandPixo digital marketing and branding agency" />
 
       {pathname === '/' && <script type="application/ld+json">{JSON.stringify(organization)}</script>}
       {pathname === '/' && <script type="application/ld+json">{JSON.stringify(localBusiness)}</script>}

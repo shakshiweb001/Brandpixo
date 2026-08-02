@@ -45,7 +45,7 @@ export default function Hero() {
         </motion.span>
         
         <motion.h1 className={styles.title} variants={itemVariants}>
-          Chandigarh digital marketing agency crafting <br />
+          A digital marketing agency crafting <br />
           <span className="gradient-text">premium brand experiences</span>
         </motion.h1>
         

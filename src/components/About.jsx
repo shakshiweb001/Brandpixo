@@ -35,7 +35,7 @@ export default function About() {
         <div className={styles.collage}>
           <img 
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" 
-            alt="BrandPixo digital marketing agency workspace in Chandigarh"
+            alt="BrandPixo digital marketing agency workspace"
             className={styles.mainImage}
             loading="lazy"
           />

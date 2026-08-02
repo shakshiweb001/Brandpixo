@@ -136,7 +136,7 @@ export default function Navigation() {
   return (
     <nav className={navClass} aria-label="Main navigation">
       <Link to="/" className={styles.logo} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="BrandPixo home">
-        <img src={logo} alt="BrandPixo digital marketing agency Chandigarh" width="1600" height="1600" fetchPriority="high" />
+        <img src={logo} alt="BrandPixo digital marketing and branding agency" width="1600" height="1600" fetchPriority="high" />
       </Link>
       
       <div className={styles.links}>
