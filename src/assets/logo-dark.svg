@@ -1,9 +1,0 @@
-<svg width="250" height="75" viewBox="0 0 250 75" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <text x="10" y="44" font-family="Inter, sans-serif" font-size="38" font-weight="600" fill="#FFFFFF" letter-spacing="-1.5">brandpix</text>
-  <text x="166" y="44" font-family="Inter, sans-serif" font-size="38" font-weight="600" fill="#FFFFFF" letter-spacing="-1.5">o</text>
-  <path d="M187 23C191 26 193 30 193 34" stroke="#FFD397" stroke-width="3" stroke-linecap="round"/>
-  <path d="M193 16C199 21 201 27 201 34" stroke="#FAAC5C" stroke-width="3" stroke-linecap="round"/>
-  <line x1="20" y1="60" x2="55" y2="60" stroke="#FAAC5C" stroke-width="1.2"/>
-  <text x="62" y="63" font-family="Inter, sans-serif" font-size="8.5" font-weight="700" fill="#FFD397" letter-spacing="2">BRANDING THAT CONNECTS</text>
-  <line x1="195" y1="60" x2="230" y2="60" stroke="#FAAC5C" stroke-width="1.2"/>
-</svg>

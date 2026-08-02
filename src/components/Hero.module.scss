@@ -9,7 +9,7 @@
   align-items: flex-start;
   position: relative;
   overflow: hidden;
-  padding: 8rem max(2.5rem, calc((100vw - 1500px) / 2)) 2rem;
+  padding: 10.5rem max(2.5rem, calc((100vw - 1500px) / 2)) 2rem;
   background-color: $bg-color;
   text-align: left;
 }
@@ -161,7 +161,7 @@
 }
 
 @media (max-width: $tablet) {
-  .hero { min-height: 100svh; height: auto; padding: 7rem 1.25rem 6rem; justify-content: center; }
+  .hero { min-height: 100svh; height: auto; padding: 8.5rem 1.25rem 6rem; justify-content: center; }
   .subtitle { font-size: .7rem; letter-spacing: 2.5px; margin-bottom: 1rem; }
   .title { font-size: clamp(2.7rem, 13vw, 4.1rem); letter-spacing: -1.5px; margin-bottom: 1.4rem; }
   .description { font-size: 1.05rem; margin-bottom: 2rem; }

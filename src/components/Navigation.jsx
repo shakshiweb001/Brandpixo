@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiArrowRight, FiCheckCircle, FiMail, FiPhone, FiX } from 'react-icons/fi';
 import styles from './Navigation.module.scss';
-import logo from '../assets/logo.svg';
-import darkLogo from '../assets/logo-dark.svg';
+import logo from '../assets/brandpixo-logo.png';
 
-function MegaMenu({ setMegaOpen }) {
+function MegaMenu({ openMega, scheduleMegaClose }) {
   const menuCategories = [
     {
       title: 'Development',
@@ -37,12 +36,12 @@ function MegaMenu({ setMegaOpen }) {
   return (
     <div 
       className={styles.megaMenu}
-      onMouseEnter={() => setMegaOpen(true)}
-      onMouseLeave={() => setMegaOpen(false)}
+      onMouseEnter={openMega}
+      onMouseLeave={scheduleMegaClose}
     >
       <div className={styles.megaHeader}>
         <div><span>BrandPixo capabilities</span><strong>Choose what you want to build.</strong></div>
-        <Link to="/services" onClick={() => setMegaOpen(false)}>View all services</Link>
+        <Link to="/services" onClick={scheduleMegaClose}>View all services</Link>
       </div>
       <div className={styles.megaGrid}>
         {menuCategories.map((cat, idx) => (
@@ -54,7 +53,7 @@ function MegaMenu({ setMegaOpen }) {
                   <Link 
                     to={`/services/${item.id}`} 
                     className={`${styles.megaItem} hover-target`}
-                    onClick={() => setMegaOpen(false)}
+                    onClick={scheduleMegaClose}
                   >
                     <span>{item.name}</span><span>↗</span>
                   </Link>
@@ -73,6 +72,7 @@ export default function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [darkActive, setDarkActive] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
+  const megaCloseTimer = useRef(null);
   const [projectOpen, setProjectOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
@@ -111,13 +111,24 @@ export default function Navigation() {
     setProjectOpen(true);
   };
 
+  const openMega = () => {
+    window.clearTimeout(megaCloseTimer.current);
+    setMegaOpen(true);
+  };
+
+  const scheduleMegaClose = () => {
+    window.clearTimeout(megaCloseTimer.current);
+    megaCloseTimer.current = window.setTimeout(() => setMegaOpen(false), 220);
+  };
+
+  useEffect(() => () => window.clearTimeout(megaCloseTimer.current), []);
+
   const navClass = `${styles.nav} ${scrolled ? styles.scrolled : ''} ${darkActive ? styles.darkSectionActive : ''} ${mobileOpen ? styles.mobileNavOpen : ''}`;
 
   return (
     <nav className={navClass}>
       <div className={styles.logo} onClick={() => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-        <img src={logo} alt="BrandPixo" className={styles.lightLogo} />
-        <img src={darkLogo} alt="" aria-hidden="true" className={styles.darkLogo} />
+        <img src={logo} alt="BrandPixo — Branding That Connects" />
       </div>
       
       <div className={styles.links}>
@@ -125,11 +136,11 @@ export default function Navigation() {
         
         <div 
           className={styles.menuTrigger}
-          onMouseEnter={() => setMegaOpen(true)}
-          onMouseLeave={() => setMegaOpen(false)}
+          onMouseEnter={openMega}
+          onMouseLeave={scheduleMegaClose}
         >
           <Link to="/services" className={styles.link}>Services</Link>
-          {megaOpen && <MegaMenu setMegaOpen={setMegaOpen} />}
+          {megaOpen && <MegaMenu openMega={openMega} scheduleMegaClose={scheduleMegaClose} />}
         </div>
 
         <Link to="/blog" className={styles.link}>Blog</Link>

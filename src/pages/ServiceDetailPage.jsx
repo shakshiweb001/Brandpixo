@@ -8,7 +8,6 @@ import {
   FiChevronDown,
   FiMail,
   FiPhone,
-  FiPlay,
   FiPlus
 } from 'react-icons/fi';
 import { servicesData } from '../data/servicesData';
@@ -44,13 +43,6 @@ export default function ServiceDetailPage() {
   const otherServices = Object.entries(servicesData)
     .filter(([id]) => id !== serviceId)
     .slice(0, 2);
-  const processItems = service.process.length >= 3
-    ? service.process.slice(0, 3)
-    : [
-        ...service.process,
-        { title: 'Quality Assurance & Handover', desc: 'Refining every detail, validating the final work, and preparing a smooth delivery.' }
-      ].slice(0, 3);
-
   const faqItems = [
     ...service.faqs,
     {
@@ -96,15 +88,15 @@ export default function ServiceDetailPage() {
             <article>
               <span>Core features</span>
               <ul>
-                {service.features.map((feature) => <li key={feature.title}><FiCheck /> {feature.title}</li>)}
+                {service.features.map((feature) => <li key={feature.title}><span className={styles.stackedIcon}><i /><i /><FiCheck /></span><span>{feature.title}</span></li>)}
               </ul>
             </article>
             <article>
               <span>What this improves</span>
               <ul>
-                {service.benefits.map((benefit) => <li key={benefit.title}><FiCheck /> {benefit.title}</li>)}
-                <li><FiCheck /> Thoughtful quality assurance</li>
-                <li><FiCheck /> Clear final handover</li>
+                {service.benefits.map((benefit) => <li key={benefit.title}><span className={styles.stackedIcon}><i /><i /><FiCheck /></span><span>{benefit.title}</span></li>)}
+                <li><span className={styles.stackedIcon}><i /><i /><FiCheck /></span><span>Thoughtful quality assurance</span></li>
+                <li><span className={styles.stackedIcon}><i /><i /><FiCheck /></span><span>Clear final handover</span></li>
               </ul>
             </article>
           </div>
@@ -137,28 +129,6 @@ export default function ServiceDetailPage() {
             <button className="hover-target" onClick={() => navigate('/contact')}>Get in touch <FiArrowRight /></button>
           </div>
         </aside>
-      </section>
-
-      <section className={styles.processSection}>
-        <div className={styles.processHeader}>
-          <span className={styles.eyebrow}><FiPlus /> Our process</span>
-          <h2>A smooth workflow from first idea to final delivery.</h2>
-        </div>
-        <div className={styles.processGrid}>
-          {processItems.map((item, index) => (
-            <motion.article key={item.title} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-70px' }} variants={fadeUp}>
-              <div><span>0{index + 1}</span><strong>{index === 0 ? 'Discover' : index === processItems.length - 1 ? 'Deliver' : 'Develop'}</strong></div>
-              <FiPlus />
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
-            </motion.article>
-          ))}
-        </div>
-
-        <div className={styles.processVisual}>
-          <img src={service.portfolio[0]?.image || service.heroImage} alt="Our creative process" />
-          <div><button aria-label="Start a project" onClick={() => navigate('/contact')}><FiPlay /></button><h3>See thoughtful craft<br />behind our digital work.</h3></div>
-        </div>
       </section>
 
       <section className={styles.faqSection}>
