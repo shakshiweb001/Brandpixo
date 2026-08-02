@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="15" fill="#181818"/>
-  <path d="M44 12c7 3 11 8 12 15M42 19c4 2 7 5 8 10" fill="none" stroke="#FAAC5C" stroke-width="4" stroke-linecap="round"/>
-  <text x="9" y="44" font-family="Inter,Arial,sans-serif" font-size="27" font-weight="800" fill="#fff">BP</text>
-  <circle cx="49" cy="34" r="4" fill="#FFD397"/>
+  <rect width="64" height="64" rx="15" fill="#fff8e8"/>
+  <circle cx="31" cy="37" r="14" fill="none" stroke="#181818" stroke-width="7"/>
+  <path d="M43 10c8 3 13 9 14 18M41 18c5 2 8 6 9 12" fill="none" stroke="#FAAC5C" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="31" cy="37" r="3.5" fill="#FAAC5C"/>
 </svg>
