@@ -10,6 +10,8 @@ export default function Contact() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.name && formData.email) {
+      const message = `Hello BrandPixo!\n\nName: ${formData.name}\nEmail: ${formData.email}\nProject details: ${formData.message}`;
+      window.open(`https://wa.me/919805312402?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
       setSuccess(true);
     }
   };
@@ -26,11 +28,11 @@ export default function Contact() {
         <div className={styles.infoList}>
           <div className={styles.infoItem}>
             <span className={styles.label}>General Inquiries</span>
-            <a href="mailto:hello@brandpixo.com" className={styles.val}>hello@brandpixo.com</a>
+            <a href="mailto:brandpixo@gmail.com" className={styles.val}>brandpixo@gmail.com</a>
           </div>
           <div className={styles.infoItem}>
-            <span className={styles.label}>Call Us</span>
-            <a href="tel:+15550192834" className={styles.val}>+1 (555) 019-2834</a>
+            <span className={styles.label}>WhatsApp Us</span>
+            <a href="https://wa.me/919805312402" target="_blank" rel="noreferrer" className={styles.val}>+91 98053 12402</a>
           </div>
           <div className={styles.infoItem}>
             <span className={styles.label}>Main Headquarters</span>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiGithub, FiTwitter, FiInstagram, FiArrowUp } from 'react-icons/fi';
+import { FiFacebook, FiInstagram, FiArrowUp } from 'react-icons/fi';
 import styles from './Footer.module.scss';
 
 export default function Footer() {
@@ -44,8 +44,8 @@ export default function Footer() {
           <h4>Connect</h4>
           <ul>
             <li><Link to="/contact" className="hover-target">Get a Quote</Link></li>
-            <li><a href="mailto:hello@brandpixo.com" className="hover-target">hello@brandpixo.com</a></li>
-            <li><a href="tel:+15550192834" className="hover-target">+1 (555) 019-2834</a></li>
+            <li><a href="mailto:brandpixo@gmail.com" className="hover-target">brandpixo@gmail.com</a></li>
+            <li><a href="https://wa.me/919805312402" target="_blank" rel="noreferrer" className="hover-target">WhatsApp: +91 98053 12402</a></li>
           </ul>
         </div>
       </div>
@@ -54,9 +54,8 @@ export default function Footer() {
         <span>&copy; {new Date().getFullYear()} BrandPixo. All rights reserved.</span>
         
         <div className={styles.socials}>
-          <a href="https://twitter.com" className="hover-target" aria-label="Twitter"><FiTwitter /></a>
-          <a href="https://instagram.com" className="hover-target" aria-label="Instagram"><FiInstagram /></a>
-          <a href="https://github.com" className="hover-target" aria-label="GitHub"><FiGithub /></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" className="hover-target" aria-label="BrandPixo on Instagram"><FiInstagram /></a>
+          <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" className="hover-target" aria-label="BrandPixo on Facebook"><FiFacebook /></a>
         </div>
 
         <button className={`${styles.backToTop} hover-target`} onClick={scrollUp} aria-label="Back to top">

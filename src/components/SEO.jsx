@@ -155,9 +155,9 @@ export default function SEO() {
       logo: DEFAULT_IMAGE,
       contactPoint: {
         '@type': 'ContactPoint',
-        email: 'hello@brandpixo.com',
-        telephone: '+1-555-019-2834',
-        contactType: 'sales'
+        email: 'brandpixo@gmail.com',
+        telephone: '+91-98053-12402',
+        contactType: 'WhatsApp customer service'
       }
     };
 

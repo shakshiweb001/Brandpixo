@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiArrowRight, FiCheckCircle, FiMail, FiPhone, FiX } from 'react-icons/fi';
+import { FiArrowRight, FiCheckCircle, FiMail, FiX } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 import styles from './Navigation.module.scss';
 import logo from '../assets/brandpixo-logo.png';
 
@@ -111,6 +112,14 @@ export default function Navigation() {
     setProjectOpen(true);
   };
 
+  const submitProjectBrief = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const message = `Hello BrandPixo!\n\nName: ${data.get('name')}\nEmail: ${data.get('email')}\nService: ${data.get('service')}\nProject details: ${data.get('message')}`;
+    window.open(`https://wa.me/919805312402?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+    setSubmitted(true);
+  };
+
   const openMega = () => {
     window.clearTimeout(megaCloseTimer.current);
     setMegaOpen(true);
@@ -176,8 +185,8 @@ export default function Navigation() {
             <button className={styles.modalClose} onClick={() => setProjectOpen(false)} aria-label="Close project enquiry"><FiX /></button>
             {!submitted ? (
               <>
-                <div className={styles.modalIntro}><span>Start a project</span><h2 id="project-modal-title">Tell us what you’re ready to build.</h2><p>A few useful details are enough. Our team will reply with a clear next step within one business day.</p><div><a href="mailto:hello@brandpixo.com"><FiMail /> hello@brandpixo.com</a><a href="tel:+15550192834"><FiPhone /> +1 (555) 019-2834</a></div></div>
-                <form className={styles.modalForm} onSubmit={(event) => { event.preventDefault(); setSubmitted(true); }}>
+                <div className={styles.modalIntro}><span>Start a project</span><h2 id="project-modal-title">Tell us what you’re ready to build.</h2><p>A few useful details are enough. Our team will reply with a clear next step within one business day.</p><div><a href="mailto:brandpixo@gmail.com"><FiMail /> brandpixo@gmail.com</a><a href="https://wa.me/919805312402" target="_blank" rel="noreferrer"><FaWhatsapp /> +91 98053 12402</a></div></div>
+                <form className={styles.modalForm} onSubmit={submitProjectBrief}>
                   <label>Name<input name="name" placeholder="Your name" required autoFocus /></label>
                   <label>Email<input name="email" type="email" placeholder="you@company.com" required /></label>
                   <label>What do you need?<select name="service" defaultValue=""><option value="" disabled>Select a service</option><option>Website design & development</option><option>Brand identity</option><option>UI/UX design</option><option>Digital marketing</option></select></label>

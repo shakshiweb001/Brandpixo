@@ -61,7 +61,7 @@ export default function BlogPage() {
         <h2>Let’s shape<br /><em>your digital presence.</em></h2>
         <p>Bring clarity, character, and performance together in one premium experience.</p>
         <div>
-          <a href="mailto:hello@brandpixo.com">Email us</a>
+          <a href="mailto:brandpixo@gmail.com">Email us</a>
           <Link to="/contact" className="hover-target">Start a project <FiArrowRight /></Link>
         </div>
       </section>

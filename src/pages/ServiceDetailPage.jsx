@@ -7,9 +7,9 @@ import {
   FiCheck,
   FiChevronDown,
   FiMail,
-  FiPhone,
   FiPlus
 } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 import { servicesData } from '../data/servicesData';
 import styles from './ServiceDetailPage.module.scss';
 
@@ -124,8 +124,8 @@ export default function ServiceDetailPage() {
           ))}
           <div className={styles.contactCard}>
             <span>Start a conversation</span>
-            <a href="tel:+15550192834"><FiPhone /><div><small>Talk with an expert</small><strong>+1 (555) 019-2834</strong></div></a>
-            <a href="mailto:hello@brandpixo.com"><FiMail /><div><small>Email us</small><strong>hello@brandpixo.com</strong></div></a>
+            <a href="https://wa.me/919805312402" target="_blank" rel="noreferrer"><FaWhatsapp /><div><small>WhatsApp an expert</small><strong>+91 98053 12402</strong></div></a>
+            <a href="mailto:brandpixo@gmail.com"><FiMail /><div><small>Email us</small><strong>brandpixo@gmail.com</strong></div></a>
             <button className="hover-target" onClick={() => navigate('/contact')}>Get in touch <FiArrowRight /></button>
           </div>
         </aside>
@@ -160,8 +160,8 @@ export default function ServiceDetailPage() {
       <section className={styles.bottomCta}>
         <div><span>Build with BrandPixo</span><h2>Is your business ready for the <em>digital leap?</em></h2><p>Let’s shape a premium digital experience around your next stage of growth.</p></div>
         <div className={styles.ctaContact}>
-          <a href="tel:+15550192834"><FiPhone /><span><small>Talk with an expert</small><strong>+1 (555) 019-2834</strong></span></a>
-          <a href="mailto:hello@brandpixo.com"><FiMail /><span><small>Email us</small><strong>hello@brandpixo.com</strong></span></a>
+          <a href="https://wa.me/919805312402" target="_blank" rel="noreferrer"><FaWhatsapp /><span><small>WhatsApp an expert</small><strong>+91 98053 12402</strong></span></a>
+          <a href="mailto:brandpixo@gmail.com"><FiMail /><span><small>Email us</small><strong>brandpixo@gmail.com</strong></span></a>
           <button className="hover-target" onClick={() => navigate('/contact')}>Start your project <FiArrowRight /></button>
         </div>
       </section>

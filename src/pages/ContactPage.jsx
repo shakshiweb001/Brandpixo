@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FiArrowUpRight, FiCheck, FiCheckCircle, FiClock, FiMail, FiMapPin, FiPhone, FiSend } from 'react-icons/fi';
+import { FiArrowUpRight, FiCheck, FiCheckCircle, FiClock, FiMail, FiMapPin, FiSend } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 import styles from './ContactPage.module.scss';
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({ name: '', phone: '', email: '', company: '', service: '', contact: 'Email', message: '' });
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', company: '', service: '', contact: 'WhatsApp', message: '' });
   const [sent, setSent] = useState(false);
   const updateField = (event) => setFormData({ ...formData, [event.target.name]: event.target.value });
-  const submitForm = (event) => { event.preventDefault(); if (formData.name && formData.email) setSent(true); };
+  const submitForm = (event) => {
+    event.preventDefault();
+    if (formData.name && formData.email) {
+      const message = `Hello BrandPixo!\n\nName: ${formData.name}\nWhatsApp: ${formData.phone || 'Not provided'}\nEmail: ${formData.email}\nCompany: ${formData.company || 'Not provided'}\nService: ${formData.service || 'Not selected'}\nProject: ${formData.message}`;
+      window.open(`https://wa.me/919805312402?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+      setSent(true);
+    }
+  };
 
   return (
     <main className={styles.page}>
@@ -19,8 +27,8 @@ export default function ContactPage() {
       </section>
 
       <section className={styles.contactCards}>
-        <a href="tel:+15550192834"><FiPhone /><FiArrowUpRight /><span>Call our team</span><strong>+1 (555) 019-2834</strong><small>Speak directly with a strategist.</small></a>
-        <a href="mailto:hello@brandpixo.com"><FiMail /><FiArrowUpRight /><span>Email us</span><strong>hello@brandpixo.com</strong><small>Send project details or attach a brief.</small></a>
+        <a href="https://wa.me/919805312402" target="_blank" rel="noreferrer"><FaWhatsapp /><FiArrowUpRight /><span>WhatsApp our team</span><strong>+91 98053 12402</strong><small>Chat directly with a strategist.</small></a>
+        <a href="mailto:brandpixo@gmail.com"><FiMail /><FiArrowUpRight /><span>Email us</span><strong>brandpixo@gmail.com</strong><small>Send project details or attach a brief.</small></a>
         <div><FiMapPin /><FiArrowUpRight /><span>Studio</span><strong>New York, USA</strong><small>Working with ambitious brands worldwide.</small></div>
       </section>
 
@@ -45,7 +53,7 @@ export default function ContactPage() {
                 <label>Email address *<input name="email" type="email" value={formData.email} onChange={updateField} placeholder="you@example.com" required /></label>
                 <label>Company<input name="company" value={formData.company} onChange={updateField} placeholder="Company or brand" /></label>
                 <label className={styles.fullField}>What do you need help with?<select name="service" value={formData.service} onChange={updateField}><option value="">Select a service</option><option>Brand strategy</option><option>Website design & development</option><option>UI/UX design</option><option>Digital marketing</option></select></label>
-                <fieldset className={styles.fullField}><legend>How should we contact you?</legend><div className={styles.contactChoices}>{['Phone', 'Email', 'WhatsApp'].map((method) => <label key={method} className={formData.contact === method ? styles.selectedChoice : ''}><input type="radio" name="contact" value={method} checked={formData.contact === method} onChange={updateField} />{method}</label>)}</div></fieldset>
+                <fieldset className={styles.fullField}><legend>How should we contact you?</legend><div className={styles.contactChoices}><label className={styles.selectedChoice}><input type="radio" name="contact" value="WhatsApp" checked readOnly />WhatsApp only</label></div></fieldset>
                 <label className={styles.fullField}>Tell us about the project *<textarea name="message" value={formData.message} onChange={updateField} placeholder="What are you creating, changing, or ready to improve?" required /></label>
               </div>
               <button type="submit" className="hover-target">Send enquiry <FiSend /></button>
@@ -58,7 +66,7 @@ export default function ContactPage() {
 
       <section className={styles.assuranceStrip}><span>Before you begin</span><div><strong>One business day</strong><small>Typical response time</small></div><div><strong>Worldwide</strong><small>Remote collaboration</small></div><div><strong>Clear proposals</strong><small>Scope before commitment</small></div></section>
 
-      <section className={styles.cta}><span>Ready when you are</span><h2>Let’s build<br /><em>something exceptional.</em></h2><p>Your next digital chapter can start with one clear conversation.</p><a href="mailto:hello@brandpixo.com">Email our studio <FiArrowUpRight /></a></section>
+      <section className={styles.cta}><span>Ready when you are</span><h2>Let’s build<br /><em>something exceptional.</em></h2><p>Your next digital chapter can start with one clear conversation.</p><a href="https://wa.me/919805312402" target="_blank" rel="noreferrer">WhatsApp our studio <FiArrowUpRight /></a></section>
     </main>
   );
 }
