@@ -1,8 +1,11 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FiGithub, FiTwitter, FiInstagram, FiArrowUp } from 'react-icons/fi';
 import styles from './Footer.module.scss';
 
 export default function Footer() {
+  const navigate = useNavigate();
+
   const scrollUp = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -16,7 +19,7 @@ export default function Footer() {
         </div>
         <button 
           className={`${styles.btnPrimary} hover-target`}
-          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          onClick={() => navigate('/contact')}
         >
           Get In Touch
         </button>
@@ -31,16 +34,16 @@ export default function Footer() {
         <div className={styles.linksCol}>
           <h4>Agency</h4>
           <ul>
-            <li><a href="#about" className="hover-target">About Us</a></li>
-            <li><a href="#services" className="hover-target">Our Services</a></li>
-            <li><a href="#portfolio" className="hover-target">Featured Work</a></li>
+            <li><Link to="/about" className="hover-target">About Us</Link></li>
+            <li><Link to="/services" className="hover-target">Our Services</Link></li>
+            <li><Link to="/blog" className="hover-target">Journal</Link></li>
           </ul>
         </div>
 
         <div className={styles.linksCol}>
           <h4>Connect</h4>
           <ul>
-            <li><a href="#contact" className="hover-target">Get a Quote</a></li>
+            <li><Link to="/contact" className="hover-target">Get a Quote</Link></li>
             <li><a href="mailto:hello@brandpixo.com" className="hover-target">hello@brandpixo.com</a></li>
             <li><a href="tel:+15550192834" className="hover-target">+1 (555) 019-2834</a></li>
           </ul>

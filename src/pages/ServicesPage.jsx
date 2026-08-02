@@ -39,14 +39,10 @@ export default function ServicesPage() {
         animate="visible"
         variants={containerVariants}
       >
-        <motion.span className={styles.tag} variants={itemVariants}>Bespoke Capabilities</motion.span>
-        <motion.h1 className={styles.title} variants={itemVariants}>
-          Our Design, Development <br />
-          & <span className="gradient-text">Marketing Suites</span>
-        </motion.h1>
-        <motion.p className={styles.desc} variants={itemVariants}>
-          We scale brands with beautiful layouts, clean codebases, and target search metric executions.
-        </motion.p>
+        <motion.span className={styles.tag} variants={itemVariants}>BrandPixo / Capabilities</motion.span>
+        <motion.h1 className={styles.title} variants={itemVariants}>Our Services</motion.h1>
+        <motion.nav className={styles.breadcrumbs} variants={itemVariants}><Link to="/">Home</Link><span>/</span><strong>Services</strong></motion.nav>
+        <motion.p className={styles.desc} variants={itemVariants}>Design, development, and marketing systems built to make ambitious brands clearer, faster, and more valuable.</motion.p>
       </motion.section>
 
       <motion.section 

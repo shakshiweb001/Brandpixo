@@ -1,0 +1,71 @@
+@import '../styles/variables.scss';
+
+.page { min-height: 100vh; padding-top: 7rem; background: #fbfaf7; color: $text; }
+.hero { width: min(1400px, calc(100% - 5rem)); margin: 0 auto; padding: 4.5rem 0 5rem; }
+.breadcrumbs { display: flex; gap: .6rem; color: $muted; font-size: .72rem; font-weight: 700; text-transform: uppercase; }
+.breadcrumbs a { color: $primary; }
+.hero > div:nth-child(2) { margin-top: 3.5rem; }
+.hero > div:nth-child(2) > span, .storyCopy > span, .beliefBand > span, .sectionHeading > span, .cta > span { color: $primary; font-size: .7rem; font-weight: 800; letter-spacing: .14rem; text-transform: uppercase; }
+.hero h1 { margin-top: .8rem; color: $dark; font-size: clamp(4rem, 7.5vw, 7.6rem); line-height: .88; letter-spacing: -5px; }
+.hero mark { display: inline-block; margin-top: .55rem; padding: .02em .12em .08em; border: 2px solid $dark; border-radius: 5px; background: $primary; color: $dark; box-shadow: 6px 8px 0 rgba(24,24,24,.13); transform: rotate(.35deg); }
+.heroBottom { position: relative; margin-top: 3rem; padding-top: 2rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; border-top: 1px solid rgba(24,24,24,.14); }
+.heroBottom > p { max-width: 640px; color: $muted; font-size: clamp(1rem, 2vw, 1.2rem); line-height: 1.65; }
+.iconStack { position: relative; width: 160px; height: 105px; flex: 0 0 auto; }
+.iconStack span { position: absolute; width: 62px; height: 62px; display: grid; place-items: center; border: 2px solid $dark; border-radius: 15px; background: $white; color: $dark; font-size: 1.3rem; box-shadow: 4px 5px 0 $dark; }
+.iconStack span:nth-child(1) { left: 0; top: 26px; background: $secondary; transform: rotate(-8deg); }
+.iconStack span:nth-child(2) { left: 50px; top: 0; z-index: 2; background: $primary; transform: rotate(4deg); }
+.iconStack span:nth-child(3) { right: 0; bottom: 0; z-index: 3; transform: rotate(9deg); }
+.story { padding: 7rem max(2.5rem, calc((100% - 1400px) / 2)); display: grid; grid-template-columns: 1.08fr .92fr; gap: 5rem; align-items: center; background: #f0eee8; }
+.photoCollage { min-height: 620px; position: relative; }
+.photoCollage figure { position: absolute; padding: .8rem; background: $white; box-shadow: 0 20px 45px rgba(24,24,24,.15); }
+.photoCollage figure:first-child { inset: 0 12% 8% 0; transform: rotate(-1deg); }
+.photoCollage figure:last-child { width: 42%; right: 0; bottom: 0; z-index: 2; transform: rotate(3deg); }
+.photoCollage img { width: 100%; height: 100%; display: block; object-fit: cover; }
+.photoCollage figcaption { padding-top: .6rem; color: $muted; font-size: .62rem; }
+.storyCopy h2 { margin: .8rem 0 1.4rem; font-size: clamp(3rem, 5vw, 5rem); line-height: .92; letter-spacing: -3px; }
+.storyCopy p { margin-top: 1rem; color: $muted; font-size: 1.05rem; line-height: 1.75; }
+.storyCopy a, .cta a { margin-top: 1.7rem; padding: .9rem 1.2rem; display: inline-flex; align-items: center; gap: .55rem; border-radius: 999px; background: $dark; color: $white; font-weight: 800; }
+.beliefBand { padding: 7rem max(2.5rem, calc((100% - 1400px) / 2)); background: $dark; }
+.beliefBand h2 { max-width: 1150px; margin-top: 1rem; color: $white; font-size: clamp(3.4rem, 6vw, 6.5rem); line-height: .93; letter-spacing: -4px; }
+.beliefBand h2 em { color: $primary; font-style: normal; }
+.principles { padding: 7rem max(2.5rem, calc((100% - 1400px) / 2)); background: #fff9e9; }
+.sectionHeading { display: grid; grid-template-columns: .35fr 1fr; gap: 1rem 4rem; align-items: start; margin-bottom: 3rem; }
+.sectionHeading h2 { font-size: clamp(3rem, 5vw, 5rem); line-height: .92; letter-spacing: -3px; }
+.sectionHeading p { grid-column: 2; max-width: 620px; color: $muted; font-size: 1.05rem; line-height: 1.7; }
+.principleGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.principleGrid article { min-height: 320px; padding: 1.8rem; display: flex; flex-direction: column; justify-content: flex-end; border: 2px solid $dark; border-radius: 22px; background: $white; box-shadow: 0 7px 0 rgba(24,24,24,.15); }
+.principleGrid article:nth-child(2) { background: $primary; }
+.principleGrid article > div { margin-bottom: auto; display: flex; justify-content: space-between; color: $dark; }
+.principleGrid article > div svg { font-size: 1.7rem; }
+.principleGrid h3 { font-size: 1.7rem; }
+.principleGrid p { margin-top: .7rem; color: $muted; line-height: 1.65; }
+.principleGrid article:nth-child(2) p { color: rgba(24,24,24,.68); }
+.processStrip { padding: 2.8rem max(2.5rem, calc((100% - 1400px) / 2)); display: grid; grid-template-columns: .75fr repeat(3, 1fr); align-items: center; border-block: 2px solid $dark; background: $primary; }
+.processStrip > span { font-size: .68rem; font-weight: 800; text-transform: uppercase; }
+.processStrip div { padding-left: 1.8rem; display: grid; border-left: 1px solid rgba(24,24,24,.18); }
+.processStrip strong { font-size: 1.3rem; }
+.processStrip small { color: rgba(24,24,24,.58); text-transform: uppercase; }
+.cta { padding: 8rem 2rem 9rem; text-align: center; }
+.cta h2 { margin: 1rem auto; font-size: clamp(4rem, 7.5vw, 7.5rem); line-height: .84; letter-spacing: -5px; }
+.cta h2 em { color: $primary; font-style: normal; }
+.cta p { margin-top: 1.4rem; color: $muted; }
+.cta a { background: $primary; color: $dark; }
+
+@media (max-width: $desktop) { .story { grid-template-columns: 1fr; } .photoCollage { min-height: 560px; } .principleGrid { grid-template-columns: 1fr 1fr; } .principleGrid article:last-child { grid-column: 1 / -1; } }
+@media (max-width: $tablet) {
+  .page { padding-top: 6rem; }
+  .hero { width: calc(100% - 1.5rem); padding: 3rem 0 4rem; }
+  .hero h1 { font-size: clamp(3.3rem, 16vw, 5.2rem); letter-spacing: -3px; }
+  .heroBottom { flex-direction: column; }
+  .story, .beliefBand, .principles { padding: 5rem .75rem; }
+  .photoCollage { min-height: 420px; }
+  .storyCopy h2, .beliefBand h2, .sectionHeading h2 { font-size: clamp(3rem, 13vw, 4.3rem); letter-spacing: -3px; }
+  .sectionHeading { grid-template-columns: 1fr; }
+  .sectionHeading p { grid-column: auto; }
+  .principleGrid { grid-template-columns: 1fr; }
+  .principleGrid article:last-child { grid-column: auto; }
+  .processStrip { padding: 2.5rem 1rem; grid-template-columns: 1fr; gap: 1.2rem; }
+  .processStrip div { padding: 1rem 0 0; border-left: 0; border-top: 1px solid rgba(24,24,24,.18); }
+  .cta { padding: 7rem .75rem; }
+  .cta h2 { font-size: clamp(3.5rem, 15vw, 5.5rem); letter-spacing: -3px; }
+}

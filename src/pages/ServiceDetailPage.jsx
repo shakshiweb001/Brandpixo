@@ -1,184 +1,183 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FiChevronDown, FiCheck } from 'react-icons/fi';
+import {
+  FiArrowRight,
+  FiArrowUpRight,
+  FiCheck,
+  FiChevronDown,
+  FiMail,
+  FiPhone,
+  FiPlay,
+  FiPlus
+} from 'react-icons/fi';
 import { servicesData } from '../data/servicesData';
 import styles from './ServiceDetailPage.module.scss';
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 26 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } }
+};
+
 export default function ServiceDetailPage() {
   const { serviceId } = useParams();
+  const navigate = useNavigate();
   const service = servicesData[serviceId];
-  const [openFaq, setOpenFaq] = useState(null);
+  const [openFaq, setOpenFaq] = useState(0);
 
-  // Scroll to top on load/navigation
   useEffect(() => {
     window.scrollTo(0, 0);
+    setOpenFaq(0);
   }, [serviceId]);
 
   if (!service) {
     return (
-      <div className={styles.page} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <h2>Service not found. <Link to="/services">Go back to Services</Link></h2>
-      </div>
+      <main className={styles.page}>
+        <div className={styles.notFound}>
+          <h2>Service not found.</h2>
+          <Link to="/services">Back to services</Link>
+        </div>
+      </main>
     );
   }
 
-  // Duplicate tech list for continuous marquee loop
-  const marqueeList = [...service.technologies, ...service.technologies];
+  const otherServices = Object.entries(servicesData)
+    .filter(([id]) => id !== serviceId)
+    .slice(0, 2);
+  const processItems = service.process.length >= 3
+    ? service.process.slice(0, 3)
+    : [
+        ...service.process,
+        { title: 'Quality Assurance & Handover', desc: 'Refining every detail, validating the final work, and preparing a smooth delivery.' }
+      ].slice(0, 3);
 
-  const handleCtaClick = () => {
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const faqItems = [
+    ...service.faqs,
+    {
+      q: `What is included in a ${service.title} engagement?`,
+      a: 'Discovery, strategic direction, production, quality assurance, and a polished final handover are included. Your exact deliverables are confirmed before work begins.'
+    },
+    {
+      q: 'How long does the project usually take?',
+      a: `Most ${service.title.toLowerCase()} projects move from kickoff to delivery within four to eight weeks, depending on scope and feedback speed.`
+    },
+    {
+      q: 'How do feedback and revisions work?',
+      a: 'Feedback is gathered at clear milestones. Every phase includes focused refinement before approval, keeping decisions calm and progress predictable.'
+    }
+  ];
 
   return (
-    <div className={styles.page}>
-      {/* 1. Hero */}
-      <section className={styles.hero}>
-        <div>
-          <nav className={styles.breadcrumbs}>
-            <Link to="/">Home</Link>
-            <span>/</span>
-            <Link to="/services">Services</Link>
-            <span>/</span>
-            <span>{service.title}</span>
+    <main className={styles.page}>
+      <section className={styles.titleBanner}>
+        <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+          <span className={styles.kicker}>BrandPixo / Services</span>
+          <h1>Service Detail</h1>
+          <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
+            <Link to="/">Home</Link><span>/</span><Link to="/services">Services</Link><span>/</span><strong>{service.title}</strong>
           </nav>
-          <h1 className={styles.heroTitle}>{service.title}</h1>
-          <button onClick={handleCtaClick} className={styles.btnPrimary}>
-            Request Consultation
-          </button>
-        </div>
-        <div className={styles.heroImageWrap}>
-          <img src={service.heroImage} alt={service.title} />
-        </div>
+        </motion.div>
       </section>
 
-      {/* 2. About */}
-      <section className={styles.aboutSection}>
-        <div className={styles.aboutCard}>
-          <h2 className={styles.sectionTitle} style={{ textAlign: 'left', marginBottom: '1.5rem' }}>About Service</h2>
-          <p style={{ fontSize: '1.1rem', color: '#6B6B6B', lineHeight: '1.7' }}>{service.aboutText}</p>
-        </div>
-        <div>
-          <img 
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" 
-            alt="Creative Team Workspace" 
-            style={{ width: '100%', borderRadius: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.02)' }}
-            loading="lazy"
-          />
-        </div>
-      </section>
+      <section className={styles.detailLayout}>
+        <div className={styles.mainColumn}>
+          <motion.div className={styles.heroMedia} initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75 }}>
+            <img src={service.heroImage} alt={service.title} />
+            <span>{service.category}</span>
+          </motion.div>
 
-      {/* 3. Why Choose */}
-      <section className={styles.whySection}>
-        <h2 className={styles.sectionTitle}>Why Choose This</h2>
-        <div className={styles.whyGrid}>
-          {service.features.map((feat, idx) => (
-            <div key={idx} className={styles.whyCard}>
-              <h3 style={{ fontSize: '1.3rem', fontWeight: '600', marginBottom: '1rem', color: '#181818' }}>{feat.title}</h3>
-              <p style={{ color: '#6B6B6B', fontSize: '0.95rem' }}>{feat.desc}</p>
+          <div className={styles.sectionIntro}>
+            <span className={styles.eyebrow}><FiPlus /> What we offer</span>
+            <h2>{service.title}</h2>
+            <p>{service.aboutText}</p>
+          </div>
+
+          <div className={styles.offerGrid}>
+            <article>
+              <span>Core features</span>
+              <ul>
+                {service.features.map((feature) => <li key={feature.title}><FiCheck /> {feature.title}</li>)}
+              </ul>
+            </article>
+            <article>
+              <span>What this improves</span>
+              <ul>
+                {service.benefits.map((benefit) => <li key={benefit.title}><FiCheck /> {benefit.title}</li>)}
+                <li><FiCheck /> Thoughtful quality assurance</li>
+                <li><FiCheck /> Clear final handover</li>
+              </ul>
+            </article>
+          </div>
+
+          <div className={styles.whyChoose}>
+            <span className={styles.eyebrow}>Why choose BrandPixo</span>
+            <h3>{service.tagline}</h3>
+            <p>We combine strategic clarity with high-end execution, so the finished work feels distinctive, performs reliably, and stays useful as your business grows.</p>
+            <div className={styles.reasons}>
+              {['Senior-led expertise', 'Tailored strategy', 'Refined creative craft', 'Results-oriented delivery'].map((reason) => (
+                <span key={reason}><FiCheck /> {reason}</span>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
+
+        <aside className={styles.sidebar}>
+          <div className={styles.sideHeading}><span>Explore</span><h3>Other Services</h3></div>
+          {otherServices.map(([id, item]) => (
+            <Link className={`${styles.serviceLink} hover-target`} to={`/services/${id}`} key={id}>
+              <span>{item.category}</span>
+              <strong>{item.title}</strong>
+              <FiArrowUpRight />
+            </Link>
+          ))}
+          <div className={styles.contactCard}>
+            <span>Start a conversation</span>
+            <a href="tel:+15550192834"><FiPhone /><div><small>Talk with an expert</small><strong>+1 (555) 019-2834</strong></div></a>
+            <a href="mailto:hello@brandpixo.com"><FiMail /><div><small>Email us</small><strong>hello@brandpixo.com</strong></div></a>
+            <button className="hover-target" onClick={() => navigate('/contact')}>Get in touch <FiArrowRight /></button>
+          </div>
+        </aside>
       </section>
 
-      {/* 4. Process */}
       <section className={styles.processSection}>
-        <h2 className={styles.sectionTitle}>Execution Process</h2>
-        <div className={styles.processList}>
-          {service.process.map((proc, idx) => (
-            <div key={idx} className={styles.processItem}>
-              <span className={styles.processNum}>0{idx + 1}</span>
-              <div>
-                <h3 style={{ fontSize: '1.4rem', fontWeight: '600', marginBottom: '0.5rem', color: '#181818' }}>{proc.title}</h3>
-                <p style={{ color: '#6B6B6B', fontSize: '1rem' }}>{proc.desc}</p>
-              </div>
-            </div>
+        <div className={styles.processHeader}>
+          <span className={styles.eyebrow}><FiPlus /> Our process</span>
+          <h2>A smooth workflow from first idea to final delivery.</h2>
+        </div>
+        <div className={styles.processGrid}>
+          {processItems.map((item, index) => (
+            <motion.article key={item.title} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-70px' }} variants={fadeUp}>
+              <div><span>0{index + 1}</span><strong>{index === 0 ? 'Discover' : index === processItems.length - 1 ? 'Deliver' : 'Develop'}</strong></div>
+              <FiPlus />
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
+            </motion.article>
           ))}
         </div>
-      </section>
 
-      {/* 5. Benefits */}
-      <section className={styles.benefitsSection}>
-        <h2 className={styles.sectionTitle}>Main Benefits</h2>
-        <div className={styles.benefitsGrid}>
-          {service.benefits.map((ben, idx) => (
-            <div key={idx} className={styles.benefitCard}>
-              <h3 style={{ fontSize: '1.4rem', fontWeight: '600', color: '#181818' }}>{ben.title}</h3>
-              <p style={{ color: '#6B6B6B', fontSize: '0.95rem' }}>{ben.desc}</p>
-            </div>
-          ))}
+        <div className={styles.processVisual}>
+          <img src={service.portfolio[0]?.image || service.heroImage} alt="Our creative process" />
+          <div><button aria-label="View our work" onClick={() => navigate('/portfolio')}><FiPlay /></button><h3>See thoughtful craft<br />behind our digital work.</h3></div>
         </div>
       </section>
 
-      {/* 6. Portfolio */}
-      <section className={styles.portfolioSection}>
-        <h2 className={styles.sectionTitle}>Related Cases</h2>
-        <div className={styles.portfolioGrid}>
-          {service.portfolio.map((port, idx) => (
-            <div key={idx} className={styles.portfolioCard}>
-              <img src={port.image} alt={port.title} loading="lazy" />
-              <div style={{ padding: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <h3 style={{ fontSize: '1.25rem', fontWeight: '600' }}>{port.title}</h3>
-                <span style={{ color: '#6B6B6B', fontSize: '0.9rem' }}>{port.category}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 7. Technologies */}
-      <section className={`dark-section ${styles.techSection}`}>
-        <h2 className={styles.techTitle}>Tech & Frameworks</h2>
-        <div className={styles.marqueeContainer}>
-          <div className={styles.marquee}>
-            {marqueeList.map((tech, idx) => (
-              <span key={idx} style={{ paddingRight: '4rem' }}>{tech}</span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 8. Testimonials */}
-      <section className={styles.testimonialsSection}>
-        <h2 className={styles.sectionTitle}>Client Perspective</h2>
-        {service.testimonials.map((test, idx) => (
-          <div key={idx} className={styles.testCard}>
-            <p style={{ fontSize: '1.2rem', fontStyle: 'italic', marginBottom: '2rem', color: '#181818' }}>"{test.quote}"</p>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
-              <img src={test.avatar} alt={test.author} style={{ width: '50px', height: '50px', borderRadius: '50%' }} loading="lazy" />
-              <div style={{ textAlign: 'left' }}>
-                <h4 style={{ fontWeight: '600' }}>{test.author}</h4>
-                <span style={{ color: '#6B6B6B', fontSize: '0.85rem' }}>{test.role}</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </section>
-
-      {/* 9. FAQ */}
       <section className={styles.faqSection}>
-        <h2 className={styles.sectionTitle}>FAQ</h2>
-        <div style={{ marginTop: '4rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-          {service.faqs.map((faq, idx) => {
-            const isOpen = openFaq === idx;
+        <div className={styles.faqHeader}>
+          <span className={styles.eyebrow}><FiPlus /> FAQs</span>
+          <h2>Frequently asked questions</h2>
+        </div>
+        <div className={styles.faqList}>
+          {faqItems.map((faq, index) => {
+            const isOpen = openFaq === index;
             return (
-              <div key={idx} style={{ borderBottom: '1px solid #EAEAEA', paddingBottom: '1rem' }}>
-                <button 
-                  onClick={() => setOpenFaq(isOpen ? null : idx)}
-                  style={{ width: '100%', background: 'none', border: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 0', cursor: 'pointer', textAlign: 'left' }}
-                >
-                  <h3 style={{ fontSize: '1.2rem', fontWeight: '600' }}>{faq.q}</h3>
-                  <FiChevronDown style={{ transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.3s ease' }} />
+              <div className={`${styles.faqItem} ${isOpen ? styles.open : ''}`} key={faq.q}>
+                <button onClick={() => setOpenFaq(isOpen ? null : index)} aria-expanded={isOpen}>
+                  <span>{faq.q}</span><FiChevronDown />
                 </button>
-                <AnimatePresence>
+                <AnimatePresence initial={false}>
                   {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      style={{ overflow: 'hidden', color: '#6B6B6B', fontSize: '0.95rem' }}
-                    >
-                      <p style={{ padding: '0.5rem 0 1.5rem 0' }}>{faq.a}</p>
+                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.3 }}>
+                      <p>{faq.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -188,13 +187,14 @@ export default function ServiceDetailPage() {
         </div>
       </section>
 
-      {/* 10. Contact CTA */}
-      <section className={`dark-section ${styles.contactCta}`} id="contact">
-        <h2>Launch your next product with BrandPixo</h2>
-        <button onClick={handleCtaClick} className={styles.btnPrimary}>
-          Get In Touch
-        </button>
+      <section className={styles.bottomCta}>
+        <div><span>Build with BrandPixo</span><h2>Is your business ready for the <em>digital leap?</em></h2><p>Let’s shape a premium digital experience around your next stage of growth.</p></div>
+        <div className={styles.ctaContact}>
+          <a href="tel:+15550192834"><FiPhone /><span><small>Talk with an expert</small><strong>+1 (555) 019-2834</strong></span></a>
+          <a href="mailto:hello@brandpixo.com"><FiMail /><span><small>Email us</small><strong>hello@brandpixo.com</strong></span></a>
+          <button className="hover-target" onClick={() => navigate('/contact')}>Start your project <FiArrowRight /></button>
+        </div>
       </section>
-    </div>
+    </main>
   );
 }

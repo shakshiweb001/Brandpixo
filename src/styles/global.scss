@@ -25,11 +25,22 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
   line-height: 1.1;
   color: $dark;
+  overflow-wrap: anywhere;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+}
+
+p,
+li,
+span,
+button,
+input,
+textarea,
+select {
+  overflow-wrap: anywhere;
 }
 
 // Lenis smooth scroll classes
@@ -121,5 +132,16 @@ html.lenis {
   color: $white !important;
   h1, h2, h3, h4, h5, h6 {
     color: $white !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
   }
 }

@@ -1,0 +1,86 @@
+@import '../styles/variables.scss';
+
+.page { min-height: 100vh; padding: 8rem 4rem 6rem; background: $bg-color; color: $text; }
+.hero { position: relative; isolation: isolate; width: min(1400px, 100%); min-height: 360px; margin: 1.5rem auto 0; padding: 5rem 2rem; border-radius: 26px; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 1.3rem; text-align: center; background: #171614; color: $white; box-shadow: 0 40px 100px rgba(24,24,24,.16); }
+.hero::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(135deg, rgba(255,255,255,.045), transparent 48%); }
+.hero h1 { max-width: 1120px; font-size: clamp(3rem, 7vw, 6rem); line-height: 1; letter-spacing: -.04em; font-weight: 700; }
+.eyebrow { color: $primary; font-size: .76rem; font-weight: 850; letter-spacing: .22rem; text-transform: uppercase; }
+.heroFooter { display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem; }
+.heroFooter p { max-width: 580px; color: rgba(255,255,255,.64); font-size: 1.08rem; line-height: 1.75; }
+.heroFooter span { color: $secondary; font-size: .72rem; font-weight: 800; letter-spacing: .12rem; text-transform: uppercase; }
+.heroOrb { position: absolute; z-index: -1; width: 520px; height: 520px; right: -7rem; bottom: -12rem; border-radius: 50%; background: radial-gradient(circle at 36% 32%, #ffd29d, #e99437 35%, #332014 70%); filter: blur(.2px); opacity: .75; box-shadow: 0 0 100px rgba(233,148,55,.16); }
+.portfolioHero { background: linear-gradient(135deg, #171614 0%, #28201a 100%); }
+.portfolioHero::after { content: ''; position: absolute; left: 1.5rem; right: 1.5rem; bottom: 1.2rem; height: 7px; opacity: .3; background: repeating-linear-gradient(120deg, transparent 0 6px, $primary 6px 8px); }
+.heroBreadcrumbs { display: flex; justify-content: center; gap: .7rem; color: rgba(255,255,255,.5); font-size: .78rem; text-transform: uppercase; }
+.heroBreadcrumbs a { color: $primary; }
+.heroDescription { max-width: 760px; color: rgba(255,255,255,.62); font-size: clamp(1rem,2vw,1.2rem); line-height: 1.65; }
+
+.introBand, .sectionLead { width: min(1200px, 100%); margin: 7rem auto 4rem; display: grid; grid-template-columns: .36fr 1fr; gap: 3rem; }
+.introBand h2, .sectionLead h2 { color: $dark; font-size: clamp(2.6rem, 5vw, 5rem); line-height: .98; letter-spacing: -.04em; }
+.stageList { width: min(1200px, 100%); margin: 0 auto; border-top: 1px solid rgba(24,24,24,.1); }
+.stage { display: grid; grid-template-columns: 110px minmax(0,1.2fr) minmax(250px,.65fr); gap: clamp(2rem,5vw,6rem); padding: 4rem 0; border-bottom: 1px solid rgba(24,24,24,.1); align-items: start; }
+.stageNumber { color: $primary; font-family: $font-heading; font-size: 3.4rem; line-height: 1; }
+.stageCopy span { color: $primary; font-size: .72rem; font-weight: 850; letter-spacing: .16rem; text-transform: uppercase; }
+.stageCopy h2 { margin: .8rem 0 1.2rem; color: $dark; font-size: clamp(2rem,3.5vw,3.8rem); line-height: 1; }
+.stageCopy p { max-width: 620px; color: $muted; line-height: 1.8; }
+.stage ul { list-style: none; display: grid; gap: .8rem; }
+.stage li { padding: .85rem 0; color: $dark; border-bottom: 1px solid rgba(24,24,24,.08); display: flex; align-items: center; gap: .7rem; font-weight: 650; }
+.stage li svg { color: $primary; }
+
+.principles { width: min(1200px,100%); margin: 3rem auto 7rem; }
+.principleGrid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+.principleGrid article { min-height: 310px; padding: 2rem; border-radius: 26px; background: $white; border: 1px solid rgba(24,24,24,.06); display: flex; flex-direction: column; justify-content: flex-end; gap: 1rem; box-shadow: 0 22px 50px rgba(24,24,24,.035); }
+.principleGrid article > span { width: 3rem; height: 3rem; margin-bottom: auto; border-radius: 50%; display: grid; place-items: center; color: $primary; background: rgba(250,172,92,.1); }
+.principleGrid h3 { color: $dark; font-size: 1.5rem; }
+.principleGrid p { color: $muted; line-height: 1.7; }
+
+.workSection { width: min(1400px,100%); margin: 6rem auto; }
+.filterBar { margin-bottom: 2rem; padding-bottom: 1.2rem; border-bottom: 1px solid rgba(24,24,24,.1); display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.filterBar > span { color: $muted; font-size: .75rem; font-weight: 800; letter-spacing: .12rem; text-transform: uppercase; }
+.filterBar div { display: flex; flex-wrap: wrap; gap: .5rem; }
+.filterBar button { padding: .7rem 1.1rem; border: 1px solid rgba(24,24,24,.1); border-radius: 999px; background: transparent; color: $muted; cursor: pointer; font: inherit; transition: .3s ease; }
+.filterBar button:hover, .filterBar .activeFilter { background: $dark; border-color: $dark; color: $white; }
+.workGrid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 4rem 1.2rem; }
+.workCard { min-width: 0; }
+.workImage { position: relative; height: 520px; overflow: hidden; border-radius: 28px; background: #ddd; }
+.workImage::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,.42)); }
+.workImage img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.16,1,.3,1); }
+.workImage span { position: absolute; z-index: 1; left: 1.4rem; bottom: 1.4rem; padding: .55rem .85rem; border-radius: 999px; background: rgba(255,255,255,.88); backdrop-filter: blur(12px); color: $dark; font-size: .7rem; font-weight: 850; letter-spacing: .1rem; text-transform: uppercase; }
+.workCard:hover .workImage img { transform: scale(1.045); }
+.featuredWork { grid-column: 1 / -1; }
+.featuredWork .workImage { height: 680px; }
+.workMeta { padding: 1.3rem .2rem 0; display: flex; justify-content: space-between; gap: 1.5rem; align-items: flex-start; }
+.workMeta h2 { color: $dark; font-size: clamp(1.8rem,3vw,3rem); line-height: 1; }
+.workMeta p { margin-top: .5rem; color: $muted; }
+.workMeta strong { color: $primary; font-size: .78rem; letter-spacing: .06rem; text-transform: uppercase; text-align: right; }
+
+.pageCta { width: min(1200px,100%); min-height: 520px; margin: 7rem auto 0; padding: clamp(2rem,6vw,5rem); border-radius: 34px; background: #171614; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 1.8rem; box-shadow: 0 35px 90px rgba(24,24,24,.14); }
+.pageCta h2 { max-width: 920px; color: $white; font-size: clamp(3rem,6vw,6rem); line-height: .95; letter-spacing: -.04em; }
+.pageCta a { display: inline-flex; align-items: center; gap: .6rem; padding: 1rem 1.5rem; border-radius: 999px; background: $primary; color: $dark; font-weight: 850; }
+
+@media (max-width: $desktop) {
+  .page { padding: 7rem 1rem 4rem; }
+  .stage { grid-template-columns: 80px 1fr; }
+  .stage ul { grid-column: 2; }
+  .principleGrid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: $tablet) {
+  .page { padding: 6.2rem .75rem 3rem; }
+  .hero { min-height: 330px; padding: 3.5rem 1.5rem; border-radius: 24px; }
+  .hero h1 { font-size: clamp(3.2rem,16vw,5rem); }
+  .heroFooter { flex-direction: column; align-items: flex-start; }
+  .heroOrb { width: 330px; height: 330px; right: -10rem; bottom: -7rem; }
+  .introBand, .sectionLead { margin: 4rem auto 2rem; grid-template-columns: 1fr; gap: 1rem; }
+  .stage { grid-template-columns: 1fr; gap: 1.2rem; padding: 2.7rem 0; }
+  .stage ul { grid-column: auto; }
+  .stageNumber { font-size: 2.5rem; }
+  .principleGrid article { min-height: 240px; }
+  .filterBar { align-items: flex-start; flex-direction: column; }
+  .workGrid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .featuredWork { grid-column: auto; }
+  .workImage, .featuredWork .workImage { height: 390px; border-radius: 22px; }
+  .workMeta { flex-direction: column; gap: .7rem; }
+  .workMeta strong { text-align: left; }
+  .pageCta { min-height: 440px; border-radius: 24px; }
+}

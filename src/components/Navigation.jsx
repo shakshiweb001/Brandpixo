@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './Navigation.module.scss';
-import logo from '../assets/logo.svg';
+import logo from '../assets/brandpixo-logo.png';
 
 function MegaMenu({ setMegaOpen }) {
   const menuCategories = [
@@ -89,19 +89,8 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navigateToSection = (sectionId) => {
-    if (window.location.pathname !== '/') {
-      navigate(`/#${sectionId}`);
-      setTimeout(() => {
-        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    } else {
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const handleCtaClick = () => {
-    navigateToSection('contact');
+    navigate('/contact');
   };
 
   const navClass = `${styles.nav} ${scrolled ? styles.scrolled : ''} ${darkActive ? styles.darkSectionActive : ''}`;
@@ -113,7 +102,7 @@ export default function Navigation() {
       </div>
       
       <div className={styles.links}>
-        <span onClick={() => navigateToSection('about')} className={styles.link}>About</span>
+        <Link to="/about" className={styles.link}>About</Link>
         
         <div 
           className={styles.menuTrigger}
@@ -124,9 +113,9 @@ export default function Navigation() {
           {megaOpen && <MegaMenu setMegaOpen={setMegaOpen} />}
         </div>
 
-        <span onClick={() => navigateToSection('process')} className={styles.link}>Process</span>
-        <span onClick={() => navigateToSection('portfolio')} className={styles.link}>Portfolio</span>
-        <span onClick={() => navigateToSection('contact')} className={styles.link}>Contact</span>
+        <Link to="/portfolio" className={styles.link}>Portfolio</Link>
+        <Link to="/blog" className={styles.link}>Blog</Link>
+        <Link to="/contact" className={styles.link}>Contact</Link>
         <button onClick={handleCtaClick} className={`${styles.cta} magnetic-button`}>
           Start Project
         </button>
@@ -135,18 +124,21 @@ export default function Navigation() {
       <button 
         className={`${styles.burger} ${mobileOpen ? styles.active : ''}`} 
         onClick={() => setMobileOpen(!mobileOpen)}
+        aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={mobileOpen}
+        aria-controls="mobile-navigation"
       >
         <span></span>
         <span></span>
         <span></span>
       </button>
 
-      <div className={`${styles.mobileMenu} ${mobileOpen ? styles.open : ''}`}>
-        <span className={styles.mobileLink} onClick={() => { navigateToSection('about'); setMobileOpen(false); }}>About</span>
+      <div id="mobile-navigation" className={`${styles.mobileMenu} ${mobileOpen ? styles.open : ''}`}>
+        <Link to="/about" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>About</Link>
         <Link to="/services" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Services</Link>
-        <span className={styles.mobileLink} onClick={() => { navigateToSection('process'); setMobileOpen(false); }}>Process</span>
-        <span className={styles.mobileLink} onClick={() => { navigateToSection('portfolio'); setMobileOpen(false); }}>Portfolio</span>
-        <span className={styles.mobileLink} onClick={() => { navigateToSection('contact'); setMobileOpen(false); }}>Contact</span>
+        <Link to="/portfolio" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Portfolio</Link>
+        <Link to="/blog" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Blog</Link>
+        <Link to="/contact" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Contact</Link>
       </div>
     </nav>
   );

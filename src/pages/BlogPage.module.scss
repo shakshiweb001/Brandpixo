@@ -1,0 +1,81 @@
+@import '../styles/variables.scss';
+
+.page { min-height: 100vh; padding-top: 7rem; background: #f8f6f1; color: $text; }
+.hero { position: relative; width: min(1400px, calc(100% - 5rem)); min-height: 610px; margin: 0 auto; padding: 4.5rem 0 3.5rem; }
+.breadcrumbs { display: flex; gap: .6rem; color: $muted; font-size: .72rem; font-weight: 700; text-transform: uppercase; }
+.breadcrumbs a { color: $primary; }
+.heroTitle { margin-top: 3rem; }
+.eyebrow { color: $primary; font-size: .72rem; font-weight: 800; letter-spacing: .15rem; text-transform: uppercase; }
+.heroTitle h1 { margin-top: .8rem; color: $dark; font-size: clamp(4rem, 7.5vw, 8rem); line-height: .88; letter-spacing: -5px; }
+.heroTitle mark { display: inline-block; margin-top: .55rem; padding: .02em .12em .08em; border: 2px solid $dark; border-radius: 5px; background: $primary; color: $dark; box-shadow: 6px 8px 0 rgba(24,24,24,.13); transform: rotate(.45deg); }
+.iconStack { position: absolute; right: 4%; top: 5rem; width: 145px; height: 145px; }
+.iconStack span { position: absolute; width: 74px; height: 74px; display: grid; place-items: center; border: 2px solid $dark; border-radius: 18px; background: $white; color: $dark; font-size: 1.6rem; box-shadow: 5px 6px 0 $dark; }
+.iconStack span:nth-child(1) { left: 0; top: 42px; transform: rotate(-10deg); background: $secondary; }
+.iconStack span:nth-child(2) { left: 47px; top: 0; z-index: 2; transform: rotate(5deg); background: $primary; }
+.iconStack span:nth-child(3) { right: 0; bottom: 0; z-index: 3; transform: rotate(11deg); }
+.heroBottom { margin-top: 3rem; padding-top: 2rem; display: flex; justify-content: flex-end; align-items: flex-start; border-top: 1px solid rgba(24,24,24,.14); }
+.quoteMark { margin-right: .7rem; color: $dark; font-family: $font-heading; font-size: 4rem; font-weight: 800; line-height: .8; }
+.statementCard { width: min(530px, 100%); padding: 1.7rem 2rem; border: 2px solid $dark; border-radius: 18px; background: $secondary; box-shadow: 8px 9px 0 $primary; transform: rotate(-.5deg); }
+.statementCard h2 { color: $dark; font-size: clamp(1.8rem, 3vw, 2.7rem); line-height: .96; }
+.statementCard p { max-width: 430px; margin-top: .8rem; color: #4d463c; font-size: .84rem; font-weight: 600; line-height: 1.5; }
+
+.journal { padding: 7rem max(2.5rem, calc((100% - 1400px) / 2)) 8rem; background: #efede7; }
+.sectionHeading { display: flex; justify-content: space-between; gap: 3rem; align-items: end; margin-bottom: 3.5rem; }
+.sectionHeading h2 { color: $dark; font-size: clamp(3.8rem, 6.5vw, 7rem); line-height: .83; letter-spacing: -4px; }
+.sectionHeading h2 span { color: $primary; }
+.sectionHeading p { max-width: 390px; color: $muted; line-height: 1.7; }
+.blogGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; }
+.blogCard { min-width: 0; overflow: hidden; border: 2px solid $dark; border-radius: 24px; background: #fff8e7; box-shadow: 0 9px 0 rgba(24,24,24,.16); transition: transform .35s ease; }
+.blogCard:hover { transform: translateY(-8px); }
+.accentCard { background: $primary; }
+.cardImage { position: relative; height: 285px; border-bottom: 2px solid $dark; overflow: hidden; }
+.cardImage img { width: 100%; height: 100%; object-fit: cover; transition: transform .55s ease; }
+.blogCard:hover img { transform: scale(1.05); }
+.cardImage > span { position: absolute; left: 1rem; bottom: 1rem; padding: .45rem .7rem; border-radius: 999px; background: $white; color: $dark; font-size: .6rem; font-weight: 800; text-transform: uppercase; }
+.cardBody { min-height: 340px; padding: 1.4rem; display: flex; flex-direction: column; }
+.blogMeta { display: flex; justify-content: space-between; gap: .5rem; color: $muted; font-size: .62rem; font-weight: 800; text-transform: uppercase; }
+.accentCard .blogMeta { color: rgba(24,24,24,.68); }
+.cardBody h3 { margin: 1.4rem 0 .8rem; color: $dark; font-size: clamp(1.7rem, 2.4vw, 2.6rem); line-height: .98; letter-spacing: -1px; }
+.cardBody p { color: $muted; font-size: .84rem; line-height: 1.6; }
+.accentCard .cardBody p { color: rgba(24,24,24,.7); }
+.cardLink { width: 45px; height: 45px; margin-top: auto; display: grid; place-items: center; border: 2px solid $dark; border-radius: 12px; background: $secondary; color: $dark; font-size: 1.15rem; box-shadow: 3px 3px 0 $dark; }
+.accentCard .cardLink { background: $white; }
+.cardCount { margin-top: 2rem; display: flex; justify-content: center; align-items: center; gap: .8rem; color: $muted; font-size: .65rem; }
+.cardCount div { width: 110px; height: 2px; background: rgba(24,24,24,.15); }
+.cardCount i { display: block; width: 38%; height: 100%; background: $primary; }
+
+.cta { padding: 9rem 2rem 10rem; text-align: center; background: #fbfaf7; }
+.cta h2 { margin: 1rem auto; color: $dark; font-size: clamp(4rem, 8vw, 8rem); line-height: .82; letter-spacing: -5px; }
+.cta h2 em { color: $primary; font-style: normal; }
+.cta p { max-width: 620px; margin: 1.5rem auto; color: $muted; line-height: 1.7; }
+.cta > div { display: flex; justify-content: center; gap: .8rem; margin-top: 2rem; }
+.cta a { min-height: 50px; padding: 0 1.2rem; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; border: 1px solid rgba(24,24,24,.16); border-radius: 999px; background: $white; color: $dark; font-weight: 800; }
+.cta a:last-child { border-color: $primary; background: $primary; }
+
+@media (max-width: $desktop) {
+  .hero { width: min(100% - 2.5rem, 900px); }
+  .iconStack { opacity: .8; transform: scale(.8); transform-origin: top right; }
+  .blogGrid { grid-template-columns: repeat(2, 1fr); }
+  .blogCard:last-child { grid-column: 1 / -1; width: calc(50% - .55rem); margin: 0 auto; }
+}
+
+@media (max-width: $tablet) {
+  .page { padding-top: 6rem; }
+  .hero { width: calc(100% - 1.5rem); min-height: auto; padding: 3rem 0 4rem; }
+  .heroTitle { margin-top: 5rem; }
+  .heroTitle h1 { font-size: clamp(3.5rem, 16vw, 5.5rem); letter-spacing: -3px; }
+  .iconStack { top: 4rem; right: .5rem; transform: scale(.65); }
+  .heroBottom { margin-top: 4rem; }
+  .quoteMark { display: none; }
+  .statementCard { padding: 1.4rem; }
+  .journal { padding: 5rem .75rem 6rem; }
+  .sectionHeading { flex-direction: column; align-items: flex-start; }
+  .sectionHeading h2 { font-size: clamp(3.5rem, 15vw, 5rem); letter-spacing: -3px; }
+  .blogGrid { grid-template-columns: 1fr; }
+  .blogCard:last-child { grid-column: auto; width: auto; }
+  .cardImage { height: 260px; }
+  .cardBody { min-height: 300px; }
+  .cta { padding: 7rem .8rem; }
+  .cta h2 { font-size: clamp(3.5rem, 15vw, 5.5rem); letter-spacing: -3px; }
+  .cta > div { flex-direction: column; }
+}
