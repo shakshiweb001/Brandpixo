@@ -52,6 +52,11 @@ export default function Footer() {
 
       <div className={styles.bottom}>
         <span>&copy; {new Date().getFullYear()} BrandPixo. All rights reserved.</span>
+
+        <nav className={styles.legalLinks} aria-label="Legal">
+          <Link to="/privacy-policy">Privacy Policy</Link>
+          <Link to="/terms-and-conditions">Terms &amp; Conditions</Link>
+        </nav>
         
         <div className={styles.socials}>
           <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" className="hover-target" aria-label="BrandPixo on Instagram"><FiInstagram /></a>

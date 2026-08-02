@@ -31,6 +31,14 @@ const staticMeta = {
   '/contact': {
     title: 'Contact BrandPixo | Digital Marketing Agency',
     description: 'Contact BrandPixo for SEO, social media marketing, branding, web design and performance campaigns. Start your project on WhatsApp.'
+  },
+  '/privacy-policy': {
+    title: 'Privacy Policy | BrandPixo',
+    description: 'Read how BrandPixo collects, uses and protects information submitted through our website and project enquiry forms.'
+  },
+  '/terms-and-conditions': {
+    title: 'Terms and Conditions | BrandPixo',
+    description: 'Read the terms governing use of the BrandPixo website, its content, service enquiries and intellectual property.'
   }
 };
 
@@ -65,7 +73,7 @@ const routeDetails = (pathname) => {
   }
 
   if (staticMeta[pathname]) {
-    const labels = { '/about': 'About', '/services': 'Services', '/blog': 'Blog', '/contact': 'Contact' };
+    const labels = { '/about': 'About', '/services': 'Services', '/blog': 'Blog', '/contact': 'Contact', '/privacy-policy': 'Privacy Policy', '/terms-and-conditions': 'Terms and Conditions' };
     return {
       ...staticMeta[pathname],
       image: SHARE_IMAGE,

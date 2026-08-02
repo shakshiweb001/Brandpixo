@@ -49,27 +49,6 @@ export default function Hero() {
           <span className="gradient-text">premium brand experiences</span>
         </motion.h1>
         
-        <motion.p className={styles.description} variants={itemVariants}>
-          We combine cutting-edge technology, striking design, and strategic marketing 
-          to propel your business into the luxury tier of the digital landscape.
-        </motion.p>
-        
-        <motion.div className={styles.ctas} variants={itemVariants}>
-          <button 
-            className={`${styles.btnPrimary} hover-target`}
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            aria-label="Start a digital marketing project with BrandPixo"
-          >
-            Start Your Journey
-          </button>
-          <button 
-            className={`${styles.btnSecondary} hover-target`}
-            onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-            aria-label="Explore BrandPixo digital marketing services"
-          >
-            Explore Services
-          </button>
-        </motion.div>
       </motion.div>
 
       <button type="button" className={styles.scrollIndicator} onClick={handleScrollDown} aria-label="Scroll to learn about BrandPixo">

@@ -1,0 +1,49 @@
+.button {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 900;
+  min-height: 52px;
+  padding: 0.8rem 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border: 2px solid #151515;
+  border-radius: 999px;
+  background: #25d366;
+  color: #101010;
+  font-weight: 700;
+  box-shadow: 0 7px 0 rgba(21, 21, 21, 0.24);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+
+  svg {
+    width: 1.45rem;
+    height: 1.45rem;
+  }
+
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 0 rgba(21, 21, 21, 0.2);
+  }
+}
+
+@media (max-width: 600px) {
+  .button {
+    right: 1rem;
+    bottom: 1rem;
+    width: 54px;
+    min-height: 54px;
+    padding: 0;
+
+    span {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+  }
+}

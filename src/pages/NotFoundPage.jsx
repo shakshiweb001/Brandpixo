@@ -6,12 +6,15 @@ import styles from './NotFoundPage.module.scss';
 export default function NotFoundPage() {
   return (
     <main className={styles.page}>
-      <span>404 / Page not found</span>
-      <h1>This BrandPixo page doesn’t exist.</h1>
-      <p>Return home or explore our digital marketing and branding services.</p>
-      <div>
-        <Link to="/">Return home <FiArrowRight /></Link>
-        <Link to="/services">Explore digital marketing services</Link>
+      <div className={styles.code} aria-hidden="true">404</div>
+      <div className={styles.content}>
+        <span>Wrong turn / right direction</span>
+        <h1>This page doesn’t exist.</h1>
+        <p>The link may have moved, but your next digital idea still has somewhere to go.</p>
+        <div className={styles.actions}>
+          <Link to="/">Return home <FiArrowRight /></Link>
+          <Link to="/services">Explore BrandPixo services</Link>
+        </div>
       </div>
     </main>
   );
