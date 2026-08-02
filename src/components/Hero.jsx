@@ -45,8 +45,8 @@ export default function Hero() {
         </motion.span>
         
         <motion.h1 className={styles.title} variants={itemVariants}>
-          We craft digital experiences that <br />
-          <span className="gradient-text">define premium brands</span>
+          Chandigarh digital marketing agency crafting <br />
+          <span className="gradient-text">premium brand experiences</span>
         </motion.h1>
         
         <motion.p className={styles.description} variants={itemVariants}>
@@ -58,24 +58,26 @@ export default function Hero() {
           <button 
             className={`${styles.btnPrimary} hover-target`}
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            aria-label="Start a digital marketing project with BrandPixo"
           >
             Start Your Journey
           </button>
           <button 
             className={`${styles.btnSecondary} hover-target`}
             onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+            aria-label="Explore BrandPixo digital marketing services"
           >
             Explore Services
           </button>
         </motion.div>
       </motion.div>
 
-      <div className={styles.scrollIndicator} onClick={handleScrollDown}>
+      <button type="button" className={styles.scrollIndicator} onClick={handleScrollDown} aria-label="Scroll to learn about BrandPixo">
         <div className={styles.mouse}>
           <div className={styles.wheel}></div>
         </div>
         <span>Scroll</span>
-      </div>
+      </button>
     </section>
   );
 }

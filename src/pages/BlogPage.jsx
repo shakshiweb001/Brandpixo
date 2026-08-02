@@ -18,7 +18,7 @@ export default function BlogPage() {
 
         <div className={styles.heroTitle}>
           <span className={styles.eyebrow}>BrandPixo Journal</span>
-          <h1>Useful ideas.<br /><mark>Sharper digital brands.</mark></h1>
+          <h1>Digital marketing insights.<br /><mark>Sharper brands.</mark></h1>
         </div>
 
         <div className={styles.heroBottom}>
@@ -40,7 +40,7 @@ export default function BlogPage() {
           {blogPosts.map((post, index) => (
             <article className={`${styles.blogCard} ${index === 1 ? styles.accentCard : ''}`} key={post.slug}>
               <div className={styles.cardImage}>
-                <img src={post.image} alt={post.title} loading="lazy" />
+                <img src={post.image} alt={`${post.title} — BrandPixo digital marketing insight`} loading="lazy" />
                 <span>BrandPixo Journal</span>
               </div>
               <div className={styles.cardBody}>
@@ -61,7 +61,7 @@ export default function BlogPage() {
         <h2>Let’s shape<br /><em>your digital presence.</em></h2>
         <p>Bring clarity, character, and performance together in one premium experience.</p>
         <div>
-          <a href="mailto:brandpixo@gmail.com">Email us</a>
+          <a href="mailto:brandpixo@gmail.com">Email BrandPixo</a>
           <Link to="/contact" className="hover-target">Start a project <FiArrowRight /></Link>
         </div>
       </section>

@@ -50,7 +50,8 @@ export const TestimonialsColumn = (props) => {
                     width={40}
                     height={40}
                     src={avatar}
-                    alt={name}
+                    alt={`${name}, BrandPixo digital marketing client`}
+                    loading="lazy"
                     style={{ height: '40px', width: '40px', borderRadius: '50%', objectFit: 'cover' }}
                   />
                   <div style={{ display: 'flex', flexDirection: 'column' }}>

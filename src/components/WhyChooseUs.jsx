@@ -26,7 +26,7 @@ export default function WhyChooseUs() {
     <section className={styles.whyChooseUs}>
       <div className={styles.left}>
         <span className={styles.tag}>Why BrandPixo</span>
-        <h2 className={styles.title}>Setting Standard for Premium Agencies</h2>
+        <h2 className={styles.title}>Setting the Standard for Premium Agencies</h2>
         <p className={styles.desc}>
           We merge strategic brand management metrics with striking frontend aesthetics to deliver 
           functional digital platforms that boost organic traffic and conversions.

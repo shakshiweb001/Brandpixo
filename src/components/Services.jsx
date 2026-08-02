@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { FiCode, FiLayers, FiTrendingUp, FiArrowRight } from 'react-icons/fi';
 import styles from './Services.module.scss';
 
@@ -7,16 +8,19 @@ export default function Services() {
   const serviceData = [
     {
       icon: <FiLayers />,
+      path: '/services/brand-identity',
       title: 'Brand Identity',
       desc: 'We research, conceptualize, and design visually arresting brand identity packages, styling guidelines, and marketing collaterals to build authority.'
     },
     {
       icon: <FiCode />,
+      path: '/services/custom-website',
       title: 'Web Development',
       desc: 'High-fidelity engineering using React and animation frameworks to construct fast, responsive websites with robust backends and optimized performance.'
     },
     {
       icon: <FiTrendingUp />,
+      path: '/services/seo',
       title: 'Digital Marketing',
       desc: 'SEO strategies, keyword targeting, content audits, and conversion rate optimization metrics to boost organic discovery and sales performance.'
     }
@@ -77,10 +81,10 @@ export default function Services() {
             </div>
             <h3 className={styles.cardTitle}>{service.title}</h3>
             <p className={styles.cardDesc}>{service.desc}</p>
-            <div className={styles.learnMore}>
-              <span>Discover</span>
+            <Link to={service.path} className={styles.learnMore} aria-label={`Explore BrandPixo ${service.title} services`}>
+              <span>Explore {service.title}</span>
               <FiArrowRight className={styles.arrow} />
-            </div>
+            </Link>
           </motion.div>
         ))}
       </motion.div>

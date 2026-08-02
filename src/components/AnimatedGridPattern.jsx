@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useRef, useState } from "react";
+import React, { useCallback, useEffect, useId, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 function cn(...classes) {
@@ -21,21 +21,21 @@ export function AnimatedGridPattern({
   const id = useId();
   const containerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const [squares, setSquares] = useState(() => generateSquares(numSquares));
+  const [squares, setSquares] = useState([]);
 
-  function getPos() {
+  const getPos = useCallback(() => {
     return [
       Math.floor((Math.random() * (dimensions.width || 1000)) / width),
       Math.floor((Math.random() * (dimensions.height || 800)) / height),
     ];
-  }
+  }, [dimensions.height, dimensions.width, height, width]);
 
-  function generateSquares(count) {
+  const generateSquares = useCallback((count) => {
     return Array.from({ length: count }, (_, i) => ({
       id: i,
       pos: getPos(),
     }));
-  }
+  }, [getPos]);
 
   const updateSquarePosition = (id) => {
     setSquares((currentSquares) =>
@@ -54,7 +54,7 @@ export function AnimatedGridPattern({
     if (dimensions.width && dimensions.height) {
       setSquares(generateSquares(numSquares));
     }
-  }, [dimensions, numSquares]);
+  }, [dimensions.height, dimensions.width, generateSquares, numSquares]);
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
@@ -66,16 +66,15 @@ export function AnimatedGridPattern({
       }
     });
 
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
+    const container = containerRef.current;
+    if (container) {
+      resizeObserver.observe(container);
     }
 
     return () => {
-      if (containerRef.current) {
-        resizeObserver.unobserve(containerRef.current);
-      }
+      resizeObserver.disconnect();
     };
-  }, [containerRef]);
+  }, []);
 
   return (
     <svg
@@ -122,6 +121,7 @@ export function AnimatedGridPattern({
             transition={{
               duration,
               repeat: 1,
+              repeatDelay,
               delay: index * 0.03,
               repeatType: "reverse",
             }}

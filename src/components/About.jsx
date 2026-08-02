@@ -3,8 +3,6 @@ import { motion } from 'framer-motion';
 import styles from './About.module.scss';
 
 export default function About() {
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-
   const fadeUp = {
     hidden: { opacity: 0, y: 50 },
     visible: {
@@ -37,13 +35,13 @@ export default function About() {
         <div className={styles.collage}>
           <img 
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" 
-            alt="BrandPixo Agency Office" 
+            alt="BrandPixo digital marketing agency workspace in Chandigarh"
             className={styles.mainImage}
             loading="lazy"
           />
           <img 
             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" 
-            alt="Creative Team Working" 
+            alt="BrandPixo creative team planning a digital marketing campaign"
             className={styles.subImage}
             loading="lazy"
           />

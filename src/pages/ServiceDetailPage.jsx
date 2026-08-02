@@ -33,7 +33,7 @@ export default function ServiceDetailPage() {
     return (
       <main className={styles.page}>
         <div className={styles.notFound}>
-          <h2>Service not found.</h2>
+          <h1>Digital marketing service not found.</h1>
           <Link to="/services">Back to services</Link>
         </div>
       </main>
@@ -64,7 +64,7 @@ export default function ServiceDetailPage() {
       <section className={styles.titleBanner}>
         <motion.div initial="hidden" animate="visible" variants={fadeUp}>
           <span className={styles.kicker}>BrandPixo / Services</span>
-          <h1>Service Detail</h1>
+          <h1>{service.title} in Chandigarh</h1>
           <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
             <Link to="/">Home</Link><span>/</span><Link to="/services">Services</Link><span>/</span><strong>{service.title}</strong>
           </nav>
@@ -74,7 +74,7 @@ export default function ServiceDetailPage() {
       <section className={styles.detailLayout}>
         <div className={styles.mainColumn}>
           <motion.div className={styles.heroMedia} initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.75 }}>
-            <img src={service.heroImage} alt={service.title} />
+            <img src={service.heroImage} alt={`${service.title} services by BrandPixo in Chandigarh`} fetchPriority="high" />
             <span>{service.category}</span>
           </motion.div>
 
@@ -141,7 +141,7 @@ export default function ServiceDetailPage() {
             const isOpen = openFaq === index;
             return (
               <div className={`${styles.faqItem} ${isOpen ? styles.open : ''}`} key={faq.q}>
-                <button onClick={() => setOpenFaq(isOpen ? null : index)} aria-expanded={isOpen}>
+                <button onClick={() => setOpenFaq(isOpen ? null : index)} aria-expanded={isOpen} aria-label={`${isOpen ? 'Close' : 'Open'} answer: ${faq.q}`}>
                   <span>{faq.q}</span><FiChevronDown />
                 </button>
                 <AnimatePresence initial={false}>

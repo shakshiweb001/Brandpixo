@@ -57,7 +57,7 @@ export default function BlogDetailPage() {
         </motion.div>
         <motion.figure className={styles.heroPhoto} initial={{ opacity: 0, y: 34, rotate: -1 }} animate={{ opacity: 1, y: 0, rotate: 0 }} transition={{ duration: .85, ease: [0.16, 1, 0.3, 1] }}>
           <span className={styles.tape} />
-          <img src={post.image} alt={post.title} />
+          <img src={post.image} alt={`${post.title} — BrandPixo Chandigarh agency journal`} fetchPriority="high" />
           <figcaption>BrandPixo Journal — {post.category}</figcaption>
         </motion.figure>
       </header>
@@ -70,7 +70,7 @@ export default function BlogDetailPage() {
             <div className={styles.relatedList}>
               {relatedRail.map((item, index) => (
                 <Link key={item.slug} to={`/blog/${item.slug}`} className={styles.relatedCard}>
-                  <img src={item.image} alt="" loading="lazy" />
+                  <img src={item.image} alt={`Related BrandPixo article: ${item.title}`} loading="lazy" />
                   <div>
                     <span>0{index + 1} / {item.category}</span>
                     <h3>{item.title}</h3>

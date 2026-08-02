@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FiArrowRight, FiCheckCircle, FiMail, FiX } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import styles from './Navigation.module.scss';
@@ -76,7 +76,6 @@ export default function Navigation() {
   const megaCloseTimer = useRef(null);
   const [projectOpen, setProjectOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -135,10 +134,10 @@ export default function Navigation() {
   const navClass = `${styles.nav} ${scrolled ? styles.scrolled : ''} ${darkActive ? styles.darkSectionActive : ''} ${mobileOpen ? styles.mobileNavOpen : ''}`;
 
   return (
-    <nav className={navClass}>
-      <div className={styles.logo} onClick={() => { navigate('/'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
-        <img src={logo} alt="BrandPixo — Branding That Connects" />
-      </div>
+    <nav className={navClass} aria-label="Main navigation">
+      <Link to="/" className={styles.logo} onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} aria-label="BrandPixo home">
+        <img src={logo} alt="BrandPixo digital marketing agency Chandigarh" width="1600" height="1600" fetchPriority="high" />
+      </Link>
       
       <div className={styles.links}>
         <Link to="/about" className={styles.link}>About</Link>

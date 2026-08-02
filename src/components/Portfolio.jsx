@@ -53,7 +53,7 @@ export default function Portfolio() {
 
       <motion.div layout className={styles.grid}>
         <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project, index) => (
+          {filteredProjects.map((project) => (
             <motion.div
               layout
               initial={{ opacity: 0, scale: 0.9 }}

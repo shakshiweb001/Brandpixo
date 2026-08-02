@@ -141,6 +141,10 @@
   gap: 1.5rem;
 
   a {
+    min-width: 44px;
+    min-height: 44px;
+    display: grid;
+    place-items: center;
     color: $white;
     font-size: 1.25rem;
     transition: color 0.3s ease, transform 0.3s ease;

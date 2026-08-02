@@ -1,211 +1,213 @@
-import { useEffect } from 'react';
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { servicesData } from '../data/servicesData';
-import { blogPosts, getBlogPost } from '../data/blogPosts';
+import { getBlogPost } from '../data/blogPosts';
 
 const SITE_NAME = 'BrandPixo';
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://brandpixo.com').replace(/\/$/, '');
-const DEFAULT_IMAGE = `${SITE_URL}/favicon.svg`;
-
-const baseDescription = 'BrandPixo is a premium creative digital agency for luxury websites, brand identity, UI/UX design, SEO, social media, and performance marketing.';
+const SHARE_IMAGE = `${SITE_URL}/brandpixo-share.png`;
+const EMAIL = 'brandpixo@gmail.com';
+const PHONE = '+91-98053-12402';
+const SOCIALS = ['https://www.instagram.com/', 'https://www.facebook.com/'];
 
 const staticMeta = {
   '/': {
-    title: 'BrandPixo | Premium Creative Digital Agency',
-    description: baseDescription,
-    keywords: 'creative digital agency, luxury website design, brand identity, UI UX design, web development, digital marketing agency'
+    title: 'BrandPixo | Digital Marketing Agency Chandigarh',
+    description: 'BrandPixo is a digital marketing agency in Chandigarh offering SEO, social media, branding, web design and performance marketing.'
   },
   '/about': {
-    title: 'About BrandPixo | Luxury Digital Studio',
-    description: 'Meet BrandPixo, a strategy-led digital studio crafting refined brand identities, premium websites, and growth-focused digital experiences.',
-    keywords: 'about BrandPixo, luxury digital studio, premium branding agency, creative web agency'
-  },
-  '/blog': {
-    title: 'BrandPixo Journal | Branding, Design & Growth Insights',
-    description: 'Explore BrandPixo insights on luxury website design, brand strategy, conversion architecture, and premium digital experiences.',
-    keywords: 'branding blog, web design insights, luxury digital design, conversion design, brand strategy'
-  },
-  '/contact': {
-    title: 'Contact BrandPixo | Start a Premium Digital Project',
-    description: 'Contact BrandPixo to plan a premium website, brand identity, UI/UX design, SEO, or digital marketing project.',
-    keywords: 'contact BrandPixo, website design inquiry, branding agency contact, digital project consultation'
+    title: 'About BrandPixo | Digital Agency Chandigarh',
+    description: 'Meet BrandPixo, a Chandigarh digital agency combining brand strategy, web design, SEO and marketing to help ambitious businesses grow.'
   },
   '/services': {
-    title: 'Services | BrandPixo Creative Digital Agency',
-    description: 'Explore BrandPixo services across website development, WordPress, Shopify, UI/UX design, brand identity, SEO, social media, and performance marketing.',
-    keywords: 'website development services, UI UX design services, brand identity design, SEO optimization, performance marketing'
+    title: 'Digital Marketing Services Chandigarh | BrandPixo',
+    description: 'Explore BrandPixo services in Chandigarh: SEO, social media marketing, performance campaigns, branding, UI/UX and website development.'
+  },
+  '/blog': {
+    title: 'Digital Marketing Insights Chandigarh | BrandPixo',
+    description: 'Read BrandPixo insights on SEO, branding, conversion, website design and digital marketing strategy for growing businesses.'
+  },
+  '/contact': {
+    title: 'Contact Digital Agency Chandigarh | BrandPixo',
+    description: 'Contact BrandPixo in Chandigarh for SEO, social media, branding, web design and performance marketing. Start your project on WhatsApp.'
   }
 };
 
-const upsertMeta = (selector, attributes) => {
-  let element = document.head.querySelector(selector);
-  if (!element) {
-    element = document.createElement('meta');
-    document.head.appendChild(element);
+const truncate = (value, max) => value.length <= max ? value : `${value.slice(0, max - 1).trimEnd()}…`;
+const titleWithBrand = (value) => truncate(`${value} | BrandPixo`, 59);
+const cleanPath = (pathname) => pathname !== '/' && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+
+const routeDetails = (pathname) => {
+  if (pathname.startsWith('/services/')) {
+    const id = pathname.slice('/services/'.length);
+    const service = servicesData[id];
+    if (service) return {
+      title: titleWithBrand(`${service.title} Chandigarh`),
+      description: truncate(`${service.tagline} BrandPixo provides ${service.title.toLowerCase()} for businesses in Chandigarh and across India.`, 155),
+      image: service.heroImage,
+      type: 'website',
+      service,
+      breadcrumbs: [['Home', '/'], ['Services', '/services'], [service.title, pathname]]
+    };
   }
 
-  Object.entries(attributes).forEach(([key, value]) => {
-    element.setAttribute(key, value);
-  });
-};
-
-const upsertLink = (rel, href) => {
-  let element = document.head.querySelector(`link[rel="${rel}"]`);
-  if (!element) {
-    element = document.createElement('link');
-    element.setAttribute('rel', rel);
-    document.head.appendChild(element);
-  }
-  element.setAttribute('href', href);
-};
-
-const upsertJsonLd = (id, data) => {
-  let element = document.head.querySelector(`script#${id}`);
-  if (!element) {
-    element = document.createElement('script');
-    element.id = id;
-    element.type = 'application/ld+json';
-    document.head.appendChild(element);
-  }
-  element.textContent = JSON.stringify(data);
-};
-
-const servicePath = '/services/';
-const blogPath = '/blog/';
-
-const getRouteMeta = (pathname) => {
-  if (pathname.startsWith(servicePath)) {
-    const serviceId = pathname.replace(servicePath, '');
-    const service = servicesData[serviceId];
-
-    if (service) {
-      return {
-        title: `${service.title} | BrandPixo Services`,
-        description: `${service.tagline} ${service.aboutText}`,
-        keywords: `${service.title}, ${service.category}, BrandPixo services, premium ${service.category.toLowerCase()} agency`,
-        image: service.heroImage,
-        type: 'service',
-        service
-      };
-    }
+  if (pathname.startsWith('/blog/')) {
+    const post = getBlogPost(pathname.slice('/blog/'.length));
+    if (post) return {
+      title: titleWithBrand(post.title),
+      description: truncate(post.excerpt, 155),
+      image: post.image,
+      type: 'article',
+      post,
+      breadcrumbs: [['Home', '/'], ['Blog', '/blog'], [post.title, pathname]]
+    };
   }
 
-  if (pathname.startsWith(blogPath) && pathname !== '/blog') {
-    const slug = pathname.replace(blogPath, '');
-    const post = getBlogPost(slug);
-
-    if (post) {
-      return {
-        title: `${post.title} | BrandPixo Journal`,
-        description: post.excerpt,
-        keywords: `${post.category}, luxury digital design, BrandPixo journal, premium website strategy`,
-        image: post.image,
-        type: 'article',
-        post
-      };
-    }
+  if (staticMeta[pathname]) {
+    const labels = { '/about': 'About', '/services': 'Services', '/blog': 'Blog', '/contact': 'Contact' };
+    return {
+      ...staticMeta[pathname],
+      image: SHARE_IMAGE,
+      type: 'website',
+      breadcrumbs: pathname === '/' ? [] : [['Home', '/'], [labels[pathname], pathname]]
+    };
   }
 
   return {
-    ...staticMeta[pathname],
-    image: DEFAULT_IMAGE,
-    type: 'website'
+    title: 'Page Not Found | BrandPixo',
+    description: 'The requested BrandPixo page could not be found. Explore our digital marketing, branding and website services in Chandigarh.',
+    image: SHARE_IMAGE,
+    type: 'website',
+    noindex: true,
+    breadcrumbs: [['Home', '/'], ['Page not found', pathname]]
   };
 };
 
+const breadcrumbSchema = (items) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map(([name, path], index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name,
+    item: `${SITE_URL}${path === '/' ? '' : path}`
+  }))
+});
+
 export default function SEO() {
-  const { pathname } = useLocation();
+  const location = useLocation();
+  const pathname = cleanPath(location.pathname.toLowerCase());
+  const meta = routeDetails(pathname);
+  const canonical = `${SITE_URL}${pathname === '/' ? '' : pathname}`;
 
-  useEffect(() => {
-    const routeMeta = getRouteMeta(pathname);
-    const canonicalPath = pathname === '/' ? '' : pathname;
-    const canonical = `${SITE_URL}${canonicalPath}`;
-    const title = routeMeta.title || staticMeta['/'].title;
-    const description = (routeMeta.description || staticMeta['/'].description).slice(0, 220);
-    const image = routeMeta.image || DEFAULT_IMAGE;
-
-    document.documentElement.setAttribute('lang', 'en');
-    document.title = title;
-
-    upsertMeta('meta[name="description"]', { name: 'description', content: description });
-    upsertMeta('meta[name="keywords"]', { name: 'keywords', content: routeMeta.keywords || staticMeta['/'].keywords });
-    upsertMeta('meta[name="robots"]', { name: 'robots', content: 'index, follow, max-image-preview:large' });
-    upsertMeta('meta[name="author"]', { name: 'author', content: SITE_NAME });
-    upsertMeta('meta[name="theme-color"]', { name: 'theme-color', content: '#F7F5F2' });
-
-    upsertMeta('meta[property="og:site_name"]', { property: 'og:site_name', content: SITE_NAME });
-    upsertMeta('meta[property="og:title"]', { property: 'og:title', content: title });
-    upsertMeta('meta[property="og:description"]', { property: 'og:description', content: description });
-    upsertMeta('meta[property="og:type"]', { property: 'og:type', content: routeMeta.type === 'article' ? 'article' : 'website' });
-    upsertMeta('meta[property="og:url"]', { property: 'og:url', content: canonical });
-    upsertMeta('meta[property="og:image"]', { property: 'og:image', content: image });
-
-    upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' });
-    upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: title });
-    upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: description });
-    upsertMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: image });
-
-    upsertLink('canonical', canonical);
-
-    const organization = {
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: SITE_NAME,
-      url: SITE_URL,
-      logo: DEFAULT_IMAGE,
-      contactPoint: {
-        '@type': 'ContactPoint',
-        email: 'brandpixo@gmail.com',
-        telephone: '+91-98053-12402',
-        contactType: 'WhatsApp customer service'
-      }
-    };
-
-    const website = {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: SITE_NAME,
-      url: SITE_URL
-    };
-
-    let pageSchema = {
-      '@context': 'https://schema.org',
-      '@type': 'WebPage',
-      name: title,
-      description,
-      url: canonical,
-      isPartOf: { '@id': `${SITE_URL}/#website` }
-    };
-
-    if (routeMeta.type === 'article' && routeMeta.post) {
-      pageSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'Article',
-        headline: routeMeta.post.title,
-        description: routeMeta.post.excerpt,
-        image: routeMeta.post.image,
-        author: { '@type': 'Organization', name: SITE_NAME },
-        publisher: { '@type': 'Organization', name: SITE_NAME, logo: { '@type': 'ImageObject', url: DEFAULT_IMAGE } },
-        mainEntityOfPage: canonical
-      };
+  const organization = {
+    '@context': 'https://schema.org',
+    '@type': ['Organization', 'ProfessionalService'],
+    '@id': `${SITE_URL}/#organization`,
+    name: SITE_NAME,
+    description: 'Digital marketing agency in Chandigarh offering SEO, social media marketing, branding, web design and performance marketing.',
+    url: SITE_URL,
+    logo: { '@type': 'ImageObject', url: SHARE_IMAGE },
+    email: EMAIL,
+    telephone: PHONE,
+    sameAs: SOCIALS,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Chandigarh',
+      addressRegion: 'Punjab',
+      addressCountry: 'IN'
     }
+  };
 
-    if (routeMeta.type === 'service' && routeMeta.service) {
-      pageSchema = {
-        '@context': 'https://schema.org',
-        '@type': 'Service',
-        name: routeMeta.service.title,
-        description,
-        provider: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
-        serviceType: routeMeta.service.category,
-        url: canonical
-      };
-    }
+  const localBusiness = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': `${SITE_URL}/#localbusiness`,
+    name: SITE_NAME,
+    image: SHARE_IMAGE,
+    url: SITE_URL,
+    email: EMAIL,
+    telephone: PHONE,
+    priceRange: '$$',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Chandigarh',
+      addressRegion: 'Punjab',
+      addressCountry: 'India'
+    },
+    areaServed: ['Chandigarh', 'Punjab', 'India']
+  };
 
-    upsertJsonLd('brandpixo-organization-schema', organization);
-    upsertJsonLd('brandpixo-website-schema', { ...website, '@id': `${SITE_URL}/#website` });
-    upsertJsonLd('brandpixo-page-schema', pageSchema);
-  }, [pathname]);
+  const pageSchema = meta.post ? {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: meta.post.title,
+    description: meta.description,
+    image: meta.image,
+    mainEntityOfPage: canonical,
+    author: { '@id': `${SITE_URL}/#organization` },
+    publisher: { '@id': `${SITE_URL}/#organization` }
+  } : meta.service ? {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: meta.service.title,
+    description: meta.description,
+    serviceType: meta.service.category,
+    areaServed: { '@type': 'City', name: 'Chandigarh' },
+    provider: { '@id': `${SITE_URL}/#organization` },
+    url: canonical
+  } : {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: meta.title,
+    description: meta.description,
+    url: canonical
+  };
 
-  return null;
+  const allServicesSchema = pathname === '/services' ? {
+    '@context': 'https://schema.org',
+    '@graph': Object.entries(servicesData).map(([id, service]) => ({
+      '@type': 'Service',
+      '@id': `${SITE_URL}/services/${id}#service`,
+      name: service.title,
+      description: service.aboutText,
+      serviceType: service.category,
+      areaServed: { '@type': 'City', name: 'Chandigarh' },
+      provider: { '@id': `${SITE_URL}/#organization` },
+      url: `${SITE_URL}/services/${id}`
+    }))
+  } : null;
+
+  return (
+    <Helmet>
+      <html lang="en-IN" />
+      <title>{meta.title}</title>
+      <meta name="description" content={meta.description} />
+      <meta name="robots" content={meta.noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'} />
+      <meta name="author" content={SITE_NAME} />
+      <link rel="canonical" href={canonical} />
+
+      <meta property="og:site_name" content={SITE_NAME} />
+      <meta property="og:title" content={meta.title} />
+      <meta property="og:description" content={meta.description} />
+      <meta property="og:image" content={meta.image || SHARE_IMAGE} />
+      <meta property="og:image:alt" content="BrandPixo digital marketing agency in Chandigarh" />
+      <meta property="og:url" content={canonical} />
+      <meta property="og:type" content={meta.type} />
+      <meta property="og:locale" content="en_IN" />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={meta.title} />
+      <meta name="twitter:description" content={meta.description} />
+      <meta name="twitter:image" content={meta.image || SHARE_IMAGE} />
+      <meta name="twitter:image:alt" content="BrandPixo digital marketing agency in Chandigarh" />
+
+      {pathname === '/' && <script type="application/ld+json">{JSON.stringify(organization)}</script>}
+      {pathname === '/' && <script type="application/ld+json">{JSON.stringify(localBusiness)}</script>}
+      <script type="application/ld+json">{JSON.stringify(pageSchema)}</script>
+      {meta.breadcrumbs.length > 0 && <script type="application/ld+json">{JSON.stringify(breadcrumbSchema(meta.breadcrumbs))}</script>}
+      {allServicesSchema && <script type="application/ld+json">{JSON.stringify(allServicesSchema)}</script>}
+    </Helmet>
+  );
 }

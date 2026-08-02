@@ -40,7 +40,7 @@ export default function ServicesPage() {
         variants={containerVariants}
       >
         <motion.span className={styles.tag} variants={itemVariants}>BrandPixo / Capabilities</motion.span>
-        <motion.h1 className={styles.title} variants={itemVariants}>Our Services</motion.h1>
+        <motion.h1 className={styles.title} variants={itemVariants}>Digital Marketing Services in Chandigarh</motion.h1>
         <motion.nav className={styles.breadcrumbs} variants={itemVariants}><Link to="/">Home</Link><span>/</span><strong>Services</strong></motion.nav>
         <motion.p className={styles.desc} variants={itemVariants}>Design, development, and marketing systems built to make ambitious brands clearer, faster, and more valuable.</motion.p>
       </motion.section>
@@ -56,10 +56,10 @@ export default function ServicesPage() {
           <Link to={`/services/${id}`} key={id} style={{ display: 'block', textDecoration: 'none' }}>
             <motion.div className={styles.card} variants={itemVariants}>
               <span className={styles.cardCategory}>{service.category}</span>
-              <h3 className={styles.cardTitle}>{service.title}</h3>
+              <h2 className={styles.cardTitle}>{service.title}</h2>
               <p className={styles.cardDesc}>{service.tagline}</p>
               <div className={styles.cardLink}>
-                <span>Explore Details</span>
+                <span>Explore {service.title}</span>
                 <FiArrowRight className={styles.arrow} />
               </div>
             </motion.div>

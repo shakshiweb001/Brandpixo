@@ -1,5 +1,7 @@
 @import '../styles/variables.scss';
 
+.heroCopy h1, .articleSection h2, .lead, .article blockquote { font-family: $font-editorial; }
+
 .page { min-height: 100vh; padding: 8rem 0 7rem; color: $text; background-color: #f6f0e4; background-image: radial-gradient(rgba(24,24,24,.065) .65px, transparent .65px); background-size: 6px 6px; }
 .progress { position: fixed; inset: 0 0 auto; height: 3px; background: linear-gradient(90deg, $primary, $hover-accent); transform-origin: 0%; z-index: 120; }
 .hero { width: min(1360px, calc(100% - 5rem)); margin: 0 auto; }

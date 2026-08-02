@@ -1,5 +1,7 @@
 @import '../styles/variables.scss';
 
+.hero h1, .intro h2, .feed h2, .card h3, .cta h2 { font-family: $font-editorial; }
+
 .page { min-height: 100vh; padding-top: 7rem; background: #f8f6f1; color: $text; }
 .hero { position: relative; width: min(1400px, calc(100% - 5rem)); min-height: 610px; margin: 0 auto; padding: 4.5rem 0 3.5rem; }
 .breadcrumbs { display: flex; gap: .6rem; color: $muted; font-size: .72rem; font-weight: 700; text-transform: uppercase; }
