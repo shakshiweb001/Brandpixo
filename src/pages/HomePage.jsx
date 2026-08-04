@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiArrowDown, FiArrowUpRight, FiCode, FiCompass, FiPenTool } from 'react-icons/fi';
 import styles from './HomePage.module.scss';
-import Globe from '../components/Globe';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -27,7 +26,7 @@ export default function HomePage() {
   return (
     <main className={styles.page}>
       <section className={styles.hero} id="home">
-        <div className={styles.heroGlobe}><Globe /></div>
+        <div className={styles.heroIconStack} aria-hidden="true"><span><FiCompass /></span><span><FiPenTool /></span><span><FiCode /></span></div>
         <motion.div className={styles.heroIntro} initial="hidden" animate="visible" variants={fadeUp}>
           <span>Independent digital studio</span>
           <h1>We make ambitious brands<br /><mark>impossible to ignore.</mark></h1>
@@ -56,6 +55,7 @@ export default function HomePage() {
       <section className={styles.statement}>
         <span>Our point of view</span>
         <h2>Good design gets attention.<br /><em>Great design creates movement.</em></h2>
+        <p>We build every brand experience to do more than look distinctive—clarifying the message, earning trust, and moving the right people toward action.</p>
       </section>
 
       <section className={styles.services}>
