@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { FiArrowLeft, FiArrowRight, FiArrowUpRight, FiClock } from 'react-icons/fi';
+import { FiArrowLeft, FiArrowRight, FiArrowUpRight, FiClock, FiMonitor, FiSearch, FiTrendingUp } from 'react-icons/fi';
 import { blogPosts, getBlogPost } from '../data/blogPosts';
+import BlogComments from '../components/BlogComments';
 import styles from './BlogDetailPage.module.scss';
 
 const fadeUp = {
@@ -32,8 +33,8 @@ export default function BlogDetailPage() {
   }
 
   const currentIndex = blogPosts.findIndex((item) => item.slug === post.slug);
-  const previousPost = blogPosts[(currentIndex - 1 + blogPosts.length) % blogPosts.length];
-  const nextPost = blogPosts[(currentIndex + 1) % blogPosts.length];
+  const previousPost = blogPosts.length > 1 ? blogPosts[(currentIndex - 1 + blogPosts.length) % blogPosts.length] : null;
+  const nextPost = blogPosts.length > 1 ? blogPosts[(currentIndex + 1) % blogPosts.length] : null;
   const relatedPosts = post.related
     .map((relatedSlug) => blogPosts.find((item) => item.slug === relatedSlug))
     .filter(Boolean);
@@ -46,6 +47,7 @@ export default function BlogDetailPage() {
       <motion.div className={styles.progress} style={{ scaleX }} />
 
       <header className={styles.hero}>
+        <div className={styles.iconStack} aria-hidden="true"><span><FiMonitor /></span><span><FiSearch /></span><span><FiTrendingUp /></span></div>
         <div className={styles.heroMeta}>
           <Link to="/blog"><FiArrowLeft /> Journal</Link>
           <div><span>{post.category}</span><span><FiClock /> {post.readTime}</span></div>
@@ -63,7 +65,7 @@ export default function BlogDetailPage() {
       </header>
 
       <article className={styles.article}>
-        <aside className={styles.relatedRail} aria-label="Related blogs">
+        {relatedRail.length > 0 && <aside className={styles.relatedRail} aria-label="Related blogs">
           <div className={styles.relatedRailInner}>
             <span className={styles.relatedLabel}>Keep reading</span>
             <h2>Related blogs</h2>
@@ -80,7 +82,7 @@ export default function BlogDetailPage() {
               ))}
             </div>
           </div>
-        </aside>
+        </aside>}
 
         <div className={styles.articleContent}>
         <div className={styles.openingGrid}><p className={styles.lead}>{post.excerpt}</p></div>
@@ -90,35 +92,27 @@ export default function BlogDetailPage() {
             <motion.section id={`section-${index + 1}`} className={styles.articleSection} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }} variants={fadeUp}>
               <span>0{index + 1} / Insight</span>
               <h2>{section.title}</h2>
-              <p>{section.body}</p>
+              {section.paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+              {section.body && <p>{section.body}</p>}
+              {section.table && <div className={styles.tableWrap}><table><thead><tr>{section.table.headers.map((header) => <th key={header}>{header}</th>)}</tr></thead><tbody>{section.table.rows.map((row) => <tr key={row[0]}>{row.map((cell) => <td key={cell}>{cell}</td>)}</tr>)}</tbody></table></div>}
+              {section.list && <ul className={styles.articleList}>{section.list.map((item) => <li key={item}>{item}</li>)}</ul>}
+              {section.closing && <p>{section.closing}</p>}
+              {section.link && <Link className={styles.inlineLink} to={section.link.to}>{section.link.label} <FiArrowUpRight /></Link>}
+              {section.links && <div className={styles.serviceLinks}>{section.links.map((link) => <Link key={link.to} to={link.to}>{link.label} <FiArrowUpRight /></Link>)}</div>}
             </motion.section>
 
             {index === 0 && (
               <>
                 <blockquote>{post.pullQuote}</blockquote>
-                <div className={styles.photoPair}>
+                {relatedPosts.length > 0 && <div className={styles.photoPair}>
                   <figure><span>Related perspective</span><img src={imageOne} alt={relatedPosts[0]?.title || post.title} loading="lazy" /><figcaption>{relatedPosts[0]?.title || post.title}</figcaption></figure>
                   <figure><span>Another angle</span><img src={imageTwo} alt={relatedPosts[1]?.title || post.title} loading="lazy" /><figcaption>{relatedPosts[1]?.title || post.title}</figcaption></figure>
-                </div>
+                </div>}
               </>
             )}
 
-            {index === 1 && (
-              <figure className={styles.widePhoto}>
-                <span>BrandPixo field note</span>
-                <img src={post.image} alt={`A closer look at ${post.title}`} loading="lazy" />
-                <figcaption>Clarity in the details creates confidence in the whole experience.</figcaption>
-              </figure>
-            )}
           </React.Fragment>
         ))}
-
-        <section className={styles.summary}>
-          <span>Practical review before launch</span>
-          <div><p>Is the first message immediately clear?</p><strong>Clarity before decoration</strong></div>
-          <div><p>Does every section earn its place?</p><strong>Restraint signals confidence</strong></div>
-          <div><p>Is the next step obvious and calm?</p><strong>Guide without pressure</strong></div>
-        </section>
 
         <section className={styles.authorCard}>
           <div className={styles.authorMark}>BP</div>
@@ -128,10 +122,12 @@ export default function BlogDetailPage() {
 
         <Link to="/contact" className={`${styles.askButton} hover-target`}>Ask our team <FiArrowUpRight /></Link>
 
-        <nav className={styles.postNav} aria-label="Article navigation">
+        <BlogComments slug={post.slug} />
+
+        {previousPost && nextPost && <nav className={styles.postNav} aria-label="Article navigation">
           <Link to={`/blog/${previousPost.slug}`}><span><FiArrowLeft /> Previous</span><strong>{previousPost.title}</strong></Link>
           <Link to={`/blog/${nextPost.slug}`}><span>Next <FiArrowRight /></span><strong>{nextPost.title}</strong></Link>
-        </nav>
+        </nav>}
         </div>
       </article>
     </main>

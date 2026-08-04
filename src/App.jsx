@@ -4,15 +4,7 @@ import useSmoothScroll from './hooks/useSmoothScroll';
 import CustomCursor from './components/CustomCursor';
 import SEO from './components/SEO';
 import Navigation from './components/Navigation';
-import Hero from './components/Hero';
-import About from './components/About';
-import Services from './components/Services';
-import Process from './components/Process';
-import Testimonials from './components/Testimonials';
-import WhyChooseUs from './components/WhyChooseUs';
-import Technologies from './components/Technologies';
-import FAQ from './components/FAQ';
-import Contact from './components/Contact';
+import HomePage from './pages/HomePage';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 
@@ -27,19 +19,7 @@ const TermsPage = lazy(() => import('./pages/TermsPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function Home() {
-  return (
-    <>
-      <Hero />
-      <About />
-      <Services />
-      <Process />
-      <Testimonials />
-      <WhyChooseUs />
-      <Technologies />
-      <FAQ />
-      <Contact />
-    </>
-  );
+  return <HomePage />;
 }
 
 function ScrollToTop() {

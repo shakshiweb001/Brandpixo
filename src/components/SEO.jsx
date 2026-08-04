@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { servicesData } from '../data/servicesData';
-import { getBlogPost } from '../data/blogPosts';
+import { blogPosts, getBlogPost } from '../data/blogPosts';
 
 const SITE_NAME = 'BrandPixo';
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://brandpixo.com').replace(/\/$/, '');
@@ -63,8 +63,8 @@ const routeDetails = (pathname) => {
   if (pathname.startsWith('/blog/')) {
     const post = getBlogPost(pathname.slice('/blog/'.length));
     if (post) return {
-      title: titleWithBrand(post.title),
-      description: truncate(post.excerpt, 155),
+      title: post.metaTitle || titleWithBrand(post.title),
+      description: post.metaDescription || truncate(post.excerpt, 155),
       image: post.image,
       type: 'article',
       post,
@@ -149,6 +149,11 @@ export default function SEO() {
     headline: meta.post.title,
     description: meta.description,
     image: meta.image,
+    datePublished: meta.post.datePublished,
+    dateModified: meta.post.dateModified || meta.post.datePublished,
+    keywords: meta.post.focusKeyword,
+    articleSection: meta.post.category,
+    inLanguage: 'en-IN',
     mainEntityOfPage: canonical,
     author: { '@id': `${SITE_URL}/#organization` },
     publisher: { '@id': `${SITE_URL}/#organization` }
@@ -183,6 +188,22 @@ export default function SEO() {
     }))
   } : null;
 
+  const blogCollectionSchema = pathname === '/blog' ? {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'BrandPixo Journal',
+    url: `${SITE_URL}/blog`,
+    publisher: { '@id': `${SITE_URL}/#organization` },
+    blogPost: blogPosts.map((post) => ({
+      '@type': 'BlogPosting',
+      headline: post.title,
+      url: `${SITE_URL}/blog/${post.slug}`,
+      datePublished: post.datePublished,
+      dateModified: post.dateModified || post.datePublished,
+      image: post.image
+    }))
+  } : null;
+
   return (
     <Helmet>
       <html lang="en-IN" />
@@ -200,6 +221,9 @@ export default function SEO() {
       <meta property="og:url" content={canonical} />
       <meta property="og:type" content={meta.type} />
       <meta property="og:locale" content="en_IN" />
+      {meta.post?.datePublished && <meta property="article:published_time" content={meta.post.datePublished} />}
+      {meta.post?.dateModified && <meta property="article:modified_time" content={meta.post.dateModified} />}
+      {meta.post?.category && <meta property="article:section" content={meta.post.category} />}
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={meta.title} />
@@ -212,6 +236,7 @@ export default function SEO() {
       <script type="application/ld+json">{JSON.stringify(pageSchema)}</script>
       {meta.breadcrumbs.length > 0 && <script type="application/ld+json">{JSON.stringify(breadcrumbSchema(meta.breadcrumbs))}</script>}
       {allServicesSchema && <script type="application/ld+json">{JSON.stringify(allServicesSchema)}</script>}
+      {blogCollectionSchema && <script type="application/ld+json">{JSON.stringify(blogCollectionSchema)}</script>}
     </Helmet>
   );
 }
