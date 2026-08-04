@@ -109,6 +109,7 @@ export default function SEO() {
   const pathname = cleanPath(location.pathname.toLowerCase());
   const meta = routeDetails(pathname);
   const canonical = `${SITE_URL}${pathname === '/' ? '' : pathname}`;
+  const socialImage = meta.image?.startsWith('/') ? `${SITE_URL}${meta.image}` : (meta.image || SHARE_IMAGE);
 
   const organization = {
     '@context': 'https://schema.org',
@@ -149,7 +150,7 @@ export default function SEO() {
     '@type': 'BlogPosting',
     headline: meta.post.title,
     description: meta.description,
-    image: meta.image,
+    image: socialImage,
     datePublished: meta.post.datePublished,
     dateModified: meta.post.dateModified || meta.post.datePublished,
     keywords: meta.post.focusKeyword,
@@ -201,7 +202,7 @@ export default function SEO() {
       url: `${SITE_URL}/blog/${post.slug}`,
       datePublished: post.datePublished,
       dateModified: post.dateModified || post.datePublished,
-      image: post.image
+      image: post.image.startsWith('/') ? `${SITE_URL}${post.image}` : post.image
     }))
   } : null;
 
@@ -229,7 +230,7 @@ export default function SEO() {
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:title" content={meta.title} />
       <meta property="og:description" content={meta.description} />
-      <meta property="og:image" content={meta.image || SHARE_IMAGE} />
+      <meta property="og:image" content={socialImage} />
       <meta property="og:image:alt" content="BrandPixo digital marketing and branding agency" />
       <meta property="og:url" content={canonical} />
       <meta property="og:type" content={meta.type} />
@@ -241,7 +242,7 @@ export default function SEO() {
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={meta.title} />
       <meta name="twitter:description" content={meta.description} />
-      <meta name="twitter:image" content={meta.image || SHARE_IMAGE} />
+      <meta name="twitter:image" content={socialImage} />
       <meta name="twitter:image:alt" content="BrandPixo digital marketing and branding agency" />
 
       {pathname === '/' && <script type="application/ld+json">{JSON.stringify(organization)}</script>}
