@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { useLocation } from 'react-router-dom';
 import { servicesData } from '../data/servicesData';
 import { blogPosts, getBlogPost } from '../data/blogPosts';
+import { homeFaqs } from '../data/homeFaqs';
 
 const SITE_NAME = 'BrandPixo';
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://brandpixo.com').replace(/\/$/, '');
@@ -204,6 +205,12 @@ export default function SEO() {
     }))
   } : null;
 
+  const faqSchema = pathname === '/' ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: homeFaqs.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } }))
+  } : null;
+
   return (
     <Helmet>
       <html lang="en-IN" />
@@ -237,6 +244,7 @@ export default function SEO() {
       {meta.breadcrumbs.length > 0 && <script type="application/ld+json">{JSON.stringify(breadcrumbSchema(meta.breadcrumbs))}</script>}
       {allServicesSchema && <script type="application/ld+json">{JSON.stringify(allServicesSchema)}</script>}
       {blogCollectionSchema && <script type="application/ld+json">{JSON.stringify(blogCollectionSchema)}</script>}
+      {faqSchema && <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>}
     </Helmet>
   );
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FiArrowDown, FiArrowUpRight, FiCode, FiCompass, FiPenTool } from 'react-icons/fi';
 import styles from './HomePage.module.scss';
+import FAQ from '../components/FAQ';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -82,6 +83,8 @@ export default function HomePage() {
         <div><strong>25M+</strong><span>Revenue influenced</span></div>
         <p>Measured outcomes.<br />Memorable work.</p>
       </section>
+
+      <FAQ />
 
       <section className={styles.cta}>
         <span>Bring us the ambition</span>
