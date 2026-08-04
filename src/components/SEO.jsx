@@ -211,6 +211,12 @@ export default function SEO() {
     mainEntity: homeFaqs.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } }))
   } : null;
 
+  const articleFaqSchema = meta.post?.faqs?.length ? {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: meta.post.faqs.map((item) => ({ '@type': 'Question', name: item.q, acceptedAnswer: { '@type': 'Answer', text: item.a } }))
+  } : null;
+
   return (
     <Helmet>
       <html lang="en-IN" />
@@ -245,6 +251,7 @@ export default function SEO() {
       {allServicesSchema && <script type="application/ld+json">{JSON.stringify(allServicesSchema)}</script>}
       {blogCollectionSchema && <script type="application/ld+json">{JSON.stringify(blogCollectionSchema)}</script>}
       {faqSchema && <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>}
+      {articleFaqSchema && <script type="application/ld+json">{JSON.stringify(articleFaqSchema)}</script>}
     </Helmet>
   );
 }

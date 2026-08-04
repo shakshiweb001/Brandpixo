@@ -96,6 +96,7 @@ export default function BlogDetailPage() {
               {section.body && <p>{section.body}</p>}
               {section.table && <div className={styles.tableWrap}><table><thead><tr>{section.table.headers.map((header) => <th key={header}>{header}</th>)}</tr></thead><tbody>{section.table.rows.map((row) => <tr key={row[0]}>{row.map((cell) => <td key={cell}>{cell}</td>)}</tr>)}</tbody></table></div>}
               {section.list && <ul className={styles.articleList}>{section.list.map((item) => <li key={item}>{item}</li>)}</ul>}
+              {section.faqs && <div className={styles.articleFaqs}>{section.faqs.map((item) => <div key={item.q}><h3>{item.q}</h3><p>{item.a}</p></div>)}</div>}
               {section.closing && <p>{section.closing}</p>}
               {section.link && <Link className={styles.inlineLink} to={section.link.to}>{section.link.label} <FiArrowUpRight /></Link>}
               {section.links && <div className={styles.serviceLinks}>{section.links.map((link) => <Link key={link.to} to={link.to}>{link.label} <FiArrowUpRight /></Link>)}</div>}

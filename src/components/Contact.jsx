@@ -6,13 +6,42 @@ import styles from './Contact.module.scss';
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [success, setSuccess] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.name && formData.email) {
-      const message = `Hello BrandPixo!\n\nName: ${formData.name}\nEmail: ${formData.email}\nProject details: ${formData.message}`;
-      window.open(`https://wa.me/919805312402?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+    if (!e.currentTarget.reportValidity()) return;
+
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setError('The enquiry form is not configured yet. Please email brandpixo@gmail.com.');
+      return;
+    }
+
+    setSubmitting(true);
+    setError('');
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `New project enquiry from ${formData.name}`,
+          from_name: 'BrandPixo Website',
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: formData.message.trim()
+        })
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.message || 'Submission failed');
       setSuccess(true);
+      setFormData({ name: '', email: '', message: '' });
+    } catch {
+      setError('We could not send your enquiry. Please try again or email brandpixo@gmail.com.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -82,9 +111,10 @@ export default function Contact() {
               <label className={styles.formLabel}>Project Details</label>
             </div>
 
-            <button type="submit" className={`${styles.btnSubmit} hover-target`}>
-              Send Proposal
+            <button type="submit" className={`${styles.btnSubmit} hover-target`} disabled={submitting} aria-busy={submitting}>
+              {submitting ? 'Sending…' : 'Send Proposal'}
             </button>
+            {error && <p className={styles.errorMessage} role="alert">{error}</p>}
           </form>
         ) : (
           <motion.div 

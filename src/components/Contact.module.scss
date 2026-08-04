@@ -154,7 +154,11 @@
   @media (max-width: $tablet) {
     width: 100%;
   }
+
+  &:disabled { cursor: wait; opacity: .68; transform: none; }
 }
+
+.errorMessage { margin-top: -1rem; color: #a12d24; font-size: .9rem; line-height: 1.5; }
 
 .successMessage {
   text-align: center;
