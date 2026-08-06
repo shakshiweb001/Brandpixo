@@ -40,7 +40,7 @@ export default function BlogPage() {
           {blogPosts.map((post, index) => (
             <article className={`${styles.blogCard} ${index === 1 ? styles.accentCard : ''}`} key={post.slug}>
               <div className={styles.cardImage}>
-                <img src={post.image} alt={`${post.title} — BrandPixo digital marketing insight`} loading="lazy" />
+                <img src={post.image} alt={post.imageAlt} loading="lazy" />
                 <span>BrandPixo Journal</span>
               </div>
               <div className={styles.cardBody}>

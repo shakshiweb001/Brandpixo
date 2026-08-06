@@ -4,17 +4,34 @@ import { motion } from 'framer-motion';
 import { FiArrowUpRight, FiCheck, FiCheckCircle, FiClock, FiMail, FiMapPin, FiSend } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import styles from './ContactPage.module.scss';
+import { submitEnquiry } from '../utils/submitEnquiry';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', company: '', service: '', contact: 'WhatsApp', message: '' });
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
   const updateField = (event) => setFormData({ ...formData, [event.target.name]: event.target.value });
-  const submitForm = (event) => {
+  const submitForm = async (event) => {
     event.preventDefault();
-    if (formData.name && formData.email) {
-      const message = `Hello BrandPixo!\n\nName: ${formData.name}\nWhatsApp: ${formData.phone || 'Not provided'}\nEmail: ${formData.email}\nCompany: ${formData.company || 'Not provided'}\nService: ${formData.service || 'Not selected'}\nProject: ${formData.message}`;
-      window.open(`https://wa.me/919805312402?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+    if (!event.currentTarget.reportValidity()) return;
+    setSubmitting(true);
+    setError('');
+    try {
+      await submitEnquiry({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim() || 'Not provided',
+        company: formData.company.trim() || 'Not provided',
+        service: formData.service || 'Not selected',
+        preferred_contact: formData.contact,
+        message: formData.message.trim(),
+      }, 'Contact page enquiry');
       setSent(true);
+    } catch {
+      setError('We could not send your enquiry. Please try again or email brandpixo@gmail.com.');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -56,7 +73,8 @@ export default function ContactPage() {
                 <fieldset className={styles.fullField}><legend>How should we contact you?</legend><div className={styles.contactChoices}><label className={styles.selectedChoice}><input type="radio" name="contact" value="WhatsApp" checked readOnly />WhatsApp only</label></div></fieldset>
                 <label className={styles.fullField}>Tell us about the project *<textarea name="message" value={formData.message} onChange={updateField} placeholder="What are you creating, changing, or ready to improve?" required /></label>
               </div>
-              <button type="submit" className="hover-target">Send enquiry <FiSend /></button>
+              <button type="submit" className="hover-target" disabled={submitting} aria-busy={submitting}>{submitting ? 'Sending...' : 'Send enquiry'} <FiSend /></button>
+              {error && <p role="alert">{error}</p>}
             </form>
           ) : (
             <motion.div className={styles.sentPanel} initial={{ opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }}><FiCheckCircle /><h2>Inquiry received.</h2><p>A BrandPixo strategist will review your details and reply within one business day.</p></motion.div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiCheckCircle } from 'react-icons/fi';
 import styles from './Contact.module.scss';
+import { submitEnquiry } from '../utils/submitEnquiry';
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -13,29 +14,14 @@ export default function Contact() {
     e.preventDefault();
     if (!e.currentTarget.reportValidity()) return;
 
-    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
-    if (!accessKey) {
-      setError('The enquiry form is not configured yet. Please email brandpixo@gmail.com.');
-      return;
-    }
-
     setSubmitting(true);
     setError('');
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: accessKey,
-          subject: `New project enquiry from ${formData.name}`,
-          from_name: 'BrandPixo Website',
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          message: formData.message.trim()
-        })
-      });
-      const result = await response.json();
-      if (!response.ok || !result.success) throw new Error(result.message || 'Submission failed');
+      await submitEnquiry({
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        message: formData.message.trim(),
+      }, 'New project enquiry');
       setSuccess(true);
       setFormData({ name: '', email: '', message: '' });
     } catch {

@@ -59,7 +59,7 @@ export default function BlogDetailPage() {
         </motion.div>
         <motion.figure className={styles.heroPhoto} initial={{ opacity: 0, y: 34, rotate: -1 }} animate={{ opacity: 1, y: 0, rotate: 0 }} transition={{ duration: .85, ease: [0.16, 1, 0.3, 1] }}>
           <span className={styles.tape} />
-          <img src={post.image} alt={`${post.title} — BrandPixo agency journal`} fetchPriority="high" />
+          <img src={post.image} alt={post.imageAlt} fetchPriority="high" />
           <figcaption>BrandPixo Journal — {post.category}</figcaption>
         </motion.figure>
       </header>
@@ -72,7 +72,7 @@ export default function BlogDetailPage() {
             <div className={styles.relatedList}>
               {relatedRail.map((item, index) => (
                 <Link key={item.slug} to={`/blog/${item.slug}`} className={styles.relatedCard}>
-                  <img src={item.image} alt={`Related BrandPixo article: ${item.title}`} loading="lazy" />
+                  <img src={item.image} alt={item.imageAlt} loading="lazy" />
                   <div>
                     <span>0{index + 1} / {item.category}</span>
                     <h3>{item.title}</h3>
@@ -106,8 +106,8 @@ export default function BlogDetailPage() {
               <>
                 <blockquote>{post.pullQuote}</blockquote>
                 {relatedPosts.length > 0 && <div className={styles.photoPair}>
-                  <figure><span>Related perspective</span><img src={imageOne} alt={relatedPosts[0]?.title || post.title} loading="lazy" /><figcaption>{relatedPosts[0]?.title || post.title}</figcaption></figure>
-                  <figure><span>Another angle</span><img src={imageTwo} alt={relatedPosts[1]?.title || post.title} loading="lazy" /><figcaption>{relatedPosts[1]?.title || post.title}</figcaption></figure>
+                  <figure><span>Related perspective</span><img src={imageOne} alt={relatedPosts[0]?.imageAlt || post.imageAlt} loading="lazy" /><figcaption>{relatedPosts[0]?.title || post.title}</figcaption></figure>
+                  <figure><span>Another angle</span><img src={imageTwo} alt={relatedPosts[1]?.imageAlt || post.imageAlt} loading="lazy" /><figcaption>{relatedPosts[1]?.title || post.title}</figcaption></figure>
                 </div>}
               </>
             )}

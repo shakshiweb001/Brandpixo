@@ -29,6 +29,10 @@ const staticMeta = {
     title: 'Digital Marketing Insights | BrandPixo',
     description: 'Read BrandPixo insights on SEO, branding, conversion, website design and digital marketing strategy for growing businesses.'
   },
+  '/work': {
+    title: 'Selected Website Projects | BrandPixo',
+    description: 'Explore selected BrandPixo website projects across healthcare, home services, education, membership and community-focused brands.'
+  },
   '/contact': {
     title: 'Contact BrandPixo | Digital Marketing Agency',
     description: 'Contact BrandPixo for SEO, social media marketing, branding, web design and performance campaigns. Start your project on WhatsApp.'
@@ -46,6 +50,17 @@ const staticMeta = {
 const truncate = (value, max) => value.length <= max ? value : `${value.slice(0, max - 1).trimEnd()}…`;
 const titleWithBrand = (value) => truncate(`${value} | BrandPixo`, 59);
 const cleanPath = (pathname) => pathname !== '/' && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+const articleWordCount = (post) => [
+  post.title,
+  post.intro,
+  ...post.sections.flatMap((section) => [
+    section.title,
+    ...(section.paragraphs || []),
+    ...(section.list || []),
+    section.closing || '',
+    ...(section.faqs || []).flatMap((item) => [item.q, item.a])
+  ])
+].join(' ').trim().split(/\s+/).length;
 
 const routeDetails = (pathname) => {
   if (pathname.startsWith('/services/')) {
@@ -74,7 +89,7 @@ const routeDetails = (pathname) => {
   }
 
   if (staticMeta[pathname]) {
-    const labels = { '/about': 'About', '/services': 'Services', '/blog': 'Blog', '/contact': 'Contact', '/privacy-policy': 'Privacy Policy', '/terms-and-conditions': 'Terms and Conditions' };
+    const labels = { '/about': 'About', '/services': 'Services', '/blog': 'Blog', '/work': 'Work', '/contact': 'Contact', '/privacy-policy': 'Privacy Policy', '/terms-and-conditions': 'Terms and Conditions' };
     return {
       ...staticMeta[pathname],
       image: SHARE_IMAGE,
@@ -155,10 +170,11 @@ export default function SEO() {
     dateModified: meta.post.dateModified || meta.post.datePublished,
     keywords: meta.post.focusKeyword,
     articleSection: meta.post.category,
+    wordCount: articleWordCount(meta.post),
     inLanguage: 'en-IN',
     mainEntityOfPage: canonical,
-    author: { '@id': `${SITE_URL}/#organization` },
-    publisher: { '@id': `${SITE_URL}/#organization` }
+    author: { '@id': `${SITE_URL}/#organization`, name: SITE_NAME, url: SITE_URL },
+    publisher: { '@id': `${SITE_URL}/#organization`, name: SITE_NAME, url: SITE_URL }
   } : meta.service ? {
     '@context': 'https://schema.org',
     '@type': 'Service',
@@ -231,7 +247,7 @@ export default function SEO() {
       <meta property="og:title" content={meta.title} />
       <meta property="og:description" content={meta.description} />
       <meta property="og:image" content={socialImage} />
-      <meta property="og:image:alt" content="BrandPixo digital marketing and branding agency" />
+      <meta property="og:image:alt" content={meta.post?.imageAlt || 'BrandPixo digital marketing and branding agency'} />
       <meta property="og:url" content={canonical} />
       <meta property="og:type" content={meta.type} />
       <meta property="og:locale" content="en_IN" />
@@ -243,7 +259,7 @@ export default function SEO() {
       <meta name="twitter:title" content={meta.title} />
       <meta name="twitter:description" content={meta.description} />
       <meta name="twitter:image" content={socialImage} />
-      <meta name="twitter:image:alt" content="BrandPixo digital marketing and branding agency" />
+      <meta name="twitter:image:alt" content={meta.post?.imageAlt || 'BrandPixo digital marketing and branding agency'} />
 
       {pathname === '/' && <script type="application/ld+json">{JSON.stringify(organization)}</script>}
       {pathname === '/' && <script type="application/ld+json">{JSON.stringify(localBusiness)}</script>}

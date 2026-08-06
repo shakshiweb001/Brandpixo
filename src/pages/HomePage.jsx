@@ -5,6 +5,7 @@ import { FiArrowDown, FiArrowUpRight, FiCode, FiCompass, FiPenTool } from 'react
 import styles from './HomePage.module.scss';
 import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
+import ProjectGallery from '../components/ProjectGallery';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -71,6 +72,14 @@ export default function HomePage() {
             </motion.article>
           ))}
         </div>
+      </section>
+
+      <section className={styles.projects} id="projects">
+        <div className={styles.projectsHead}>
+          <div><span>Selected projects</span><h2>Work made to be<br />experienced.</h2></div>
+          <div className={styles.projectsIntro}><p>A selection of digital experiences created for service, healthcare, and community-focused brands.</p><Link to="/work">View all work <FiArrowUpRight /></Link></div>
+        </div>
+        <ProjectGallery limit={3} />
       </section>
 
       <section className={styles.process}>

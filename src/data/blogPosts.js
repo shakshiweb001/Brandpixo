@@ -1,5 +1,138 @@
 export const blogPosts = [
   {
+    slug: 'website-redesign-without-losing-seo',
+    title: 'How to Redesign a Website Without Losing SEO Rankings',
+    metaTitle: 'Website Redesign Without Losing SEO Rankings | BrandPixo',
+    metaDescription: 'Learn how to redesign a website without losing SEO rankings, traffic, or leads with a practical migration plan, redirect map, and launch checklist.',
+    focusKeyword: 'Website Redesign Without Losing SEO',
+    category: 'Technical SEO',
+    readTime: '11 min read',
+    date: 'August 6, 2026',
+    datePublished: '2026-08-06',
+    dateModified: '2026-08-06',
+    image: '/blog/website-redesign-without-losing-seo.png',
+    imageAlt: 'Website designer reviewing a redesign interface and an organic growth chart on a studio monitor',
+    excerpt: 'A website redesign should improve the experience without erasing the search visibility your business has already earned. The difference is disciplined migration planning.',
+    intro: 'A website redesign can sharpen your brand, improve conversions, and make the site easier to manage. It can also damage organic traffic when URLs, content, internal links, and technical signals change without a plan. This guide explains how to protect SEO before, during, and after a redesign.',
+    sections: [
+      {
+        title: 'Why Website Redesigns Can Affect SEO',
+        paragraphs: [
+          'Search engines build an understanding of a website over time. Individual URLs earn visibility through useful content, internal links, external references, and consistent technical signals. A redesign often changes several of those elements at once.',
+          'Traffic losses do not usually happen because a site looks different. They happen when valuable pages disappear, URLs change without redirects, important copy is removed, navigation becomes harder to crawl, or metadata is replaced with generic text.',
+          'The safest approach treats the redesign as both a creative project and a controlled website migration. Design, development, content, analytics, and SEO decisions need to share one launch plan.'
+        ],
+        link: { label: 'Explore our custom website services', to: '/services/custom-website' }
+      },
+      {
+        title: 'Benchmark Performance Before Changing Anything',
+        paragraphs: [
+          'Before design work begins, record what is already performing. Export organic landing pages, search queries, clicks, impressions, conversions, indexed pages, and backlinks. This baseline helps the team identify pages that need extra protection and gives the launch a meaningful comparison point.',
+          'Analytics data alone is not enough. Crawl the current website to capture every indexable URL, title tag, meta description, heading, canonical tag, status code, image reference, and internal link. Save the existing XML sitemap and robots.txt file as part of the record.',
+          'Mark the pages that generate qualified leads or rank for commercially important searches. These pages should not be removed or substantially rewritten without a clear reason supported by evidence.'
+        ]
+      },
+      {
+        title: 'Create a Complete URL and Redirect Map',
+        paragraphs: [
+          'Keeping proven URLs unchanged is the simplest way to preserve continuity. When a URL must change, map the old address to the closest relevant new page with a permanent 301 redirect. Do not send every retired URL to the homepage; that creates a poor experience and weakens topical relevance.',
+          'A redirect map should include the current URL, destination URL, reason for the change, and launch status. It becomes the shared reference for developers, content editors, and the team checking the release.',
+          'Avoid redirect chains such as an old URL pointing to an intermediate URL before reaching the final page. Each old address should resolve directly to its intended destination.'
+        ],
+        table: {
+          headers: ['Redesign change', 'SEO-safe action'],
+          rows: [
+            ['URL remains useful', 'Keep the existing URL'],
+            ['URL structure changes', 'Add a direct 301 redirect'],
+            ['Two similar pages merge', 'Redirect both to the stronger combined page'],
+            ['Content is permanently removed', 'Use a relevant replacement or return 410'],
+            ['Page moves only in navigation', 'Update internal links; no redirect needed']
+          ]
+        }
+      },
+      {
+        title: 'Protect Content That Already Earns Visibility',
+        paragraphs: [
+          'A redesign is often used to simplify copy, but shorter does not automatically mean clearer or more effective. Review the search intent, headings, supporting sections, FAQs, images, and internal links on every high-value page before editing it.',
+          'Preserve the substance that answers important visitor questions. Improve weak or outdated passages, but avoid replacing detailed, useful content with a few lines of promotional language. Search visibility and conversion quality both depend on giving people enough information to make a decision.',
+          'Each indexable page should retain a distinct purpose, one descriptive main heading, a relevant title and description, and natural internal links to related services or resources.'
+        ],
+        link: { label: 'See how website design and SEO work together', to: '/blog/website-design-vs-seo' }
+      },
+      {
+        title: 'Build Technical SEO Into the New Templates',
+        paragraphs: [
+          'Technical SEO should be part of component and template development, not a task added after visual approval. Confirm that pages render meaningful HTML, headings follow a logical hierarchy, navigation links are crawlable, canonical tags are accurate, and structured data matches visible content.',
+          'The new site should also handle mobile layouts, image dimensions, lazy loading, font delivery, and script execution carefully. Performance matters because slow or unstable pages frustrate visitors and can reduce the value of an otherwise strong redesign.',
+          'Use descriptive image alternative text where an image communicates useful information. Decorative visuals should use empty alternative text so assistive technology can skip them.'
+        ],
+        list: [
+          'Unique titles and meta descriptions',
+          'Self-referencing canonical tags on indexable pages',
+          'Valid structured data for the page type',
+          'Crawlable navigation and internal links',
+          'Responsive images with explicit dimensions',
+          'A useful custom 404 page',
+          'HTTPS with no mixed-content requests'
+        ],
+        link: { label: 'Strengthen your technical SEO foundation', to: '/services/seo' }
+      },
+      {
+        title: 'Keep the Staging Website Out of Search Results',
+        paragraphs: [
+          'A staging website should never compete with the live domain. Protect it with authentication or network restrictions. A robots.txt disallow rule alone is not reliable protection because blocked URLs can still appear in search results when other pages link to them.',
+          'At the same time, do not accidentally carry a staging noindex directive into production. The pre-launch checklist should explicitly verify robots meta tags, response headers, robots.txt, canonical URLs, and the final site hostname.'
+        ]
+      },
+      {
+        title: 'Run a Structured Pre-Launch Review',
+        paragraphs: [
+          'Crawl the staging site and compare it with the original inventory. Every important old URL should either remain live or have an approved redirect. Check navigation, breadcrumbs, XML sitemap entries, canonical tags, metadata, structured data, images, forms, analytics, and conversion events.',
+          'Test the redesigned site on real mobile and desktop viewports. Review keyboard navigation, form labels, focus states, text contrast, layout shifts, and page speed. Accessibility and SEO are not identical, but both benefit from semantic, stable, understandable pages.',
+          'Launch only after the redirect map and high-value landing pages pass review. A short delay is less expensive than recovering months of lost visibility.'
+        ]
+      },
+      {
+        title: 'Monitor the Website Closely After Launch',
+        paragraphs: [
+          'Submit the new XML sitemap through the relevant search engine tools and monitor crawling, indexing, traffic, rankings, and conversions. Check server logs and crawl reports for broken links, redirect mistakes, unexpected noindex tags, canonical conflicts, and missing assets.',
+          'Some ranking movement is normal while search engines recrawl changed pages. What matters is whether important URLs remain accessible, relevant signals transfer correctly, and performance stabilizes. Compare results against the pre-launch benchmark rather than reacting to a single day of data.',
+          'Keep redirects active for the long term. External websites, bookmarks, and older campaign links may continue sending visitors to previous URLs well after launch.'
+        ]
+      },
+      {
+        title: 'Frequently Asked Questions',
+        faqs: [
+          { q: 'Will redesigning my website hurt SEO?', a: 'A redesign does not have to hurt SEO. Risk comes from uncontrolled changes to URLs, content, internal links, metadata, performance, and indexing directives. A documented migration plan substantially reduces that risk.' },
+          { q: 'Should I change my URLs during a redesign?', a: 'Keep established URLs when they remain accurate and useful. If a URL must change, use a direct 301 redirect from the old page to the closest relevant new destination.' },
+          { q: 'How long should website redirects remain active?', a: 'Keep important redirects active indefinitely when practical. Old URLs can continue receiving visits and external links for years.' },
+          { q: 'How soon should SEO be considered in a redesign?', a: 'SEO should be included during discovery and planning, before navigation, content, URL structure, and templates are approved.' }
+        ]
+      },
+      {
+        title: 'Final Thoughts',
+        paragraphs: [
+          'A successful redesign does not choose between a stronger brand and stable organic performance. It uses evidence from the current website, protects proven assets, and improves the experience through controlled changes.',
+          'Start with a complete inventory, preserve valuable content, map every necessary redirect, build SEO into the templates, and monitor the release against a clear baseline. That discipline turns a risky migration into a durable platform for growth.'
+        ],
+        links: [
+          { label: 'Custom Website Development', to: '/services/custom-website' },
+          { label: 'SEO Services', to: '/services/seo' },
+          { label: 'UI/UX Design', to: '/services/ui-ux' },
+          { label: 'Start Your Redesign', to: '/contact' }
+        ]
+      }
+    ],
+    faqs: [
+      { q: 'Will redesigning my website hurt SEO?', a: 'A redesign does not have to hurt SEO. Risk comes from uncontrolled changes to URLs, content, internal links, metadata, performance, and indexing directives. A documented migration plan substantially reduces that risk.' },
+      { q: 'Should I change my URLs during a redesign?', a: 'Keep established URLs when they remain accurate and useful. If a URL must change, use a direct 301 redirect from the old page to the closest relevant new destination.' },
+      { q: 'How long should website redirects remain active?', a: 'Keep important redirects active indefinitely when practical. Old URLs can continue receiving visits and external links for years.' },
+      { q: 'How soon should SEO be considered in a redesign?', a: 'SEO should be included during discovery and planning, before navigation, content, URL structure, and templates are approved.' }
+    ],
+    pullQuote: 'A redesign should move the experience forward without erasing the search equity already earned.',
+    related: ['website-design-vs-seo', 'custom-website-vs-website-builder']
+  },
+  {
     slug: 'website-design-vs-seo',
     title: 'Website Design vs SEO: Why Your Business Needs Both to Succeed',
     metaTitle: 'Website Design vs SEO: Why Your Business Needs Both to Grow Online | BrandPixo',
@@ -10,7 +143,8 @@ export const blogPosts = [
     date: 'August 4, 2026',
     datePublished: '2026-08-04',
     dateModified: '2026-08-04',
-    image: '/blog/website-design-vs-seo.png',
+    image: '/blog/website-design-and-seo-strategy-session.png',
+    imageAlt: 'Designer working on a website layout beside a monitor displaying search performance analytics',
     excerpt: 'Website design and SEO are not competitors—they are partners. One attracts visitors, while the other turns their attention into action.',
     intro: 'In today’s digital-first world, having an online presence is no longer enough. Businesses need a website that looks professional and performs well in search engines.',
     sections: [
@@ -104,7 +238,8 @@ export const blogPosts = [
     date: 'August 4, 2026',
     datePublished: '2026-08-04',
     dateModified: '2026-08-04',
-    image: '/blog/custom-website-vs-builder.png',
+    image: '/blog/custom-website-and-builder-comparison.png',
+    imageAlt: 'Web professionals comparing a custom-developed website on a laptop with a builder layout on a tablet',
     excerpt: 'Website builders offer speed and convenience. Custom websites offer control, performance, and room to grow. The right choice depends on what your business needs next.',
     intro: 'Creating a website is one of the most important investments a business can make. This guide compares custom websites and website builders across design, SEO, performance, cost, and long-term value.',
     sections: [
@@ -229,7 +364,8 @@ export const blogPosts = [
     date: 'August 4, 2026',
     datePublished: '2026-08-04',
     dateModified: '2026-08-04',
-    image: '/blog/wordpress-vs-shopify.png',
+    image: '/blog/ecommerce-platform-comparison-workspace.png',
+    imageAlt: 'Ecommerce strategist comparing two online storefront designs on side-by-side laptops',
     excerpt: 'WordPress offers unmatched flexibility and SEO control. Shopify makes ecommerce remarkably simple. The better platform depends on how your business needs to operate and grow.',
     intro: 'Choosing the right platform is one of the most important decisions you will make when building a website or online store. This guide compares WordPress and Shopify across the factors that matter most.',
     sections: [

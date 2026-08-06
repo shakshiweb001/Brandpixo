@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FiArrowRight, FiCheckCircle, FiMail, FiX } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import styles from './Navigation.module.scss';
+import { submitEnquiry } from '../utils/submitEnquiry';
 import logo from '../assets/brandpixo-logo.png';
 
 function MegaMenu({ openMega, scheduleMegaClose }) {
@@ -76,6 +77,8 @@ export default function Navigation() {
   const megaCloseTimer = useRef(null);
   const [projectOpen, setProjectOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,12 +114,24 @@ export default function Navigation() {
     setProjectOpen(true);
   };
 
-  const submitProjectBrief = (event) => {
+  const submitProjectBrief = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const message = `Hello BrandPixo!\n\nName: ${data.get('name')}\nEmail: ${data.get('email')}\nService: ${data.get('service')}\nProject details: ${data.get('message')}`;
-    window.open(`https://wa.me/919805312402?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
-    setSubmitted(true);
+    setSubmitting(true);
+    setSubmitError('');
+    try {
+      await submitEnquiry({
+        name: data.get('name').trim(),
+        email: data.get('email').trim(),
+        service: data.get('service') || 'Not selected',
+        message: data.get('message').trim(),
+      }, 'Project brief');
+      setSubmitted(true);
+    } catch {
+      setSubmitError('We could not send your brief. Please try again or email brandpixo@gmail.com.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const openMega = () => {
@@ -152,6 +167,7 @@ export default function Navigation() {
         </div>
 
         <Link to="/blog" className={styles.link}>Blog</Link>
+        <Link to="/work" className={styles.link}>Work</Link>
         <Link to="/contact" className={styles.link}>Contact</Link>
         <button onClick={handleCtaClick} className={`${styles.cta} magnetic-button`}>
           Start Project
@@ -174,6 +190,7 @@ export default function Navigation() {
         <Link to="/about" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>About</Link>
         <Link to="/services" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Services</Link>
         <Link to="/blog" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Blog</Link>
+        <Link to="/work" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Work</Link>
         <Link to="/contact" className={styles.mobileLink} onClick={() => setMobileOpen(false)}>Contact</Link>
         <button className={styles.mobileProject} onClick={handleCtaClick}>Start Project</button>
       </div>
@@ -190,7 +207,8 @@ export default function Navigation() {
                   <label>Email<input name="email" type="email" placeholder="you@company.com" required /></label>
                   <label>What do you need?<select name="service" defaultValue=""><option value="" disabled>Select a service</option><option>Website design & development</option><option>Brand identity</option><option>UI/UX design</option><option>Digital marketing</option></select></label>
                   <label>Project details<textarea name="message" placeholder="Goals, timeline, and anything useful to know…" required /></label>
-                  <button type="submit">Send project brief <FiArrowRight /></button>
+                  <button type="submit" disabled={submitting} aria-busy={submitting}>{submitting ? 'Sending...' : 'Send project brief'} <FiArrowRight /></button>
+                  {submitError && <p role="alert">{submitError}</p>}
                 </form>
               </>
             ) : (
