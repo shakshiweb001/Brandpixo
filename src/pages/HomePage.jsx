@@ -94,9 +94,10 @@ export default function HomePage() {
         <p>Measured outcomes.<br />Memorable work.</p>
       </section>
 
-      <FAQ />
-
-      <Contact />
+      <section className={styles.faqContact} id="faq-contact">
+        <FAQ />
+        <Contact />
+      </section>
 
       <section className={styles.cta}>
         <span>Bring us the ambition</span>

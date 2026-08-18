@@ -1,5 +1,118 @@
 export const blogPosts = [
   {
+    slug: 'seo-friendly-blog-for-today',
+    title: 'How to Write an SEO-Friendly Blog Post That Performs Today',
+    metaTitle: 'How to Write an SEO-Friendly Blog Post That Performs Today | BrandPixo',
+    metaDescription: 'Learn how to create an SEO-friendly blog post that ranks better, reads clearly, and supports leads with search intent, structure, and internal linking.',
+    focusKeyword: 'SEO-friendly blog post',
+    category: 'Content Strategy',
+    readTime: '8 min read',
+    date: 'August 18, 2026',
+    datePublished: '2026-08-18',
+    dateModified: '2026-08-18',
+    image: '/blog/website-design-and-seo-strategy-session.png',
+    imageAlt: 'Content strategist planning an SEO-friendly blog post beside search analytics and a laptop layout',
+    excerpt: 'A strong blog post is not just well written. It answers a clear search intent, uses structure that scanners can follow, and guides readers toward the next useful step.',
+    intro: 'Publishing a blog post today means competing for attention in search results, social feeds, and inboxes all at once. The winners are not necessarily the longest articles or the ones with the most keywords. They are the posts that solve a real search problem, stay easy to read, and move the reader toward action. This guide shows how to write an SEO-friendly blog post that is useful now and still relevant later.',
+    sections: [
+      {
+        title: 'Start With Search Intent, Not a Topic Alone',
+        paragraphs: [
+          'Every search has a reason behind it. Some people want a quick answer, some want a comparison, and others want step-by-step guidance before they make a decision. If your post does not match that intent, rankings may be possible but conversions will be weak.',
+          'Before drafting, search the target keyword and study the current results. Look at the format that keeps appearing, the questions competitors answer, and the depth of explanation readers seem to expect. That research gives you the outline before the outline exists.',
+          'A good SEO blog post solves the reader’s immediate problem while also helping the business own a useful topic cluster over time.'
+        ],
+        link: { label: 'See how SEO and content work together', to: '/blog/website-design-vs-seo' }
+      },
+      {
+        title: 'Build a Structure That Is Easy to Scan',
+        paragraphs: [
+          'Search-friendly content needs a clear hierarchy. Use one descriptive H1, then break the article into sections with specific H2 headings. If a section needs more depth, add H3s rather than turning everything into a long wall of text.',
+          'Readers rarely consume a blog post from top to bottom in one pass. They scan first, read second, and decide whether the page deserves their time. A logical structure helps them find value quickly and helps search engines understand the page topic.',
+          'The strongest posts combine short paragraphs, useful subheadings, and direct language that removes friction for both readers and crawlers.'
+        ],
+        list: [
+          'Use one clear H1',
+          'Write H2s that describe the section outcome',
+          'Keep paragraphs focused on one idea',
+          'Add lists and tables when they simplify comparison',
+          'Place the most important answer near the top'
+        ]
+      },
+      {
+        title: 'Write for People First, Then Refine for Search',
+        paragraphs: [
+          'Keyword placement still matters, but keyword stuffing does not. Include the primary phrase naturally in the title, intro, at least one subheading if appropriate, and the body where it fits the context.',
+          'Use related terms that expand the topic instead of repeating the same phrase over and over. This makes the writing more natural and gives the page a better chance of matching a wider range of relevant searches.',
+          'The goal is to sound helpful and specific, not mechanical. If a sentence feels written for an algorithm instead of a human, rewrite it.'
+        ],
+        table: {
+          headers: ['Strong SEO copy', 'Weak SEO copy'],
+          rows: [
+            ['Explains the answer clearly', 'Repeats the keyword without context'],
+            ['Uses related terms naturally', 'Forces the same phrase into every paragraph'],
+            ['Supports the reader’s next step', 'Ends without direction'],
+            ['Feels specific and credible', 'Sounds generic and over-optimized']
+          ]
+        }
+      },
+      {
+        title: 'Add Internal Links That Actually Help',
+        paragraphs: [
+          'Internal links connect a blog post to the rest of your website. They help readers continue their journey and help search engines understand which pages are related.',
+          'Choose links that genuinely extend the topic. For example, a post about content strategy could point to website design, SEO services, or a related comparison article. The link should make sense inside the sentence, not feel forced into the page.',
+          'Strong internal linking also spreads authority to important service pages, which is useful when a blog post attracts the first visit and a service page needs to turn that visit into an enquiry.'
+        ],
+        links: [
+          { label: 'SEO Services', to: '/services/seo' },
+          { label: 'Website Design', to: '/services/custom-website' },
+          { label: 'Contact BrandPixo', to: '/contact' }
+        ]
+      },
+      {
+        title: 'Optimize the Meta Title and Description',
+        paragraphs: [
+          'The title tag is often the first SEO asset a reader sees in search results. It should promise a clear outcome and stay readable on mobile screens. The meta description should support that promise with a concise explanation of what the article covers.',
+          'Do not treat metadata as an afterthought. Even a well-written article can underperform if the search snippet is vague, too long, or disconnected from the page content.',
+          'A strong snippet improves the click-through rate, which can amplify the value of the page without changing the article itself.'
+        ]
+      },
+      {
+        title: 'Use Media That Reinforces the Topic',
+        paragraphs: [
+          'Images, charts, and screenshots can improve clarity when they explain something the text alone cannot. They also give the page more visual weight in search and social previews.',
+          'Use descriptive alt text only when the image conveys useful information. Decorative images should stay quiet so accessibility tools can skip them.',
+          'Make sure images are compressed, sized correctly, and relevant to the article. A fast page with intentional visuals usually performs better than a heavy page packed with unrelated graphics.'
+        ]
+      },
+      {
+        title: 'Frequently Asked Questions',
+        faqs: [
+          { q: 'How long should an SEO-friendly blog post be?', a: 'Long enough to answer the search intent fully. The right length depends on the topic, but clarity and completeness matter more than a fixed word count.' },
+          { q: 'Should every blog post target one keyword?', a: 'Yes, it helps to have one primary keyword and a small set of related phrases. That keeps the page focused while still covering the topic naturally.' },
+          { q: 'Do internal links really help blog SEO?', a: 'Yes. They help users move through the site and help search engines understand page relationships and priority.' },
+          { q: 'Can a blog post rank without backlinks?', a: 'It can, especially if the topic is specific and the site has a solid foundation. Backlinks help, but relevance, structure, and quality still matter a lot.' }
+        ]
+      },
+      {
+        title: 'Final Thoughts',
+        paragraphs: [
+          'An SEO-friendly blog post is built on relevance, structure, clarity, and useful next steps. When those pieces work together, the article can rank, earn clicks, and support business goals at the same time.',
+          'If you want content that is written for search without sounding robotic, treat every post like a small strategic asset. The right topic, format, and internal links can make today’s article valuable long after publication.'
+        ],
+        link: { label: 'Plan your next content piece', to: '/contact' }
+      }
+    ],
+    faqs: [
+      { q: 'How long should an SEO-friendly blog post be?', a: 'Long enough to answer the search intent fully. The right length depends on the topic, but clarity and completeness matter more than a fixed word count.' },
+      { q: 'Should every blog post target one keyword?', a: 'Yes, it helps to have one primary keyword and a small set of related phrases. That keeps the page focused while still covering the topic naturally.' },
+      { q: 'Do internal links really help blog SEO?', a: 'Yes. They help users move through the site and help search engines understand page relationships and priority.' },
+      { q: 'Can a blog post rank without backlinks?', a: 'It can, especially if the topic is specific and the site has a solid foundation. Backlinks help, but relevance, structure, and quality still matter a lot.' }
+    ],
+    pullQuote: 'The best blog posts are written for real readers, then refined for search.',
+    related: ['website-design-vs-seo', 'website-redesign-without-losing-seo']
+  },
+  {
     slug: 'website-redesign-without-losing-seo',
     title: 'How to Redesign a Website Without Losing SEO Rankings',
     metaTitle: 'Website Redesign Without Losing SEO Rankings | BrandPixo',

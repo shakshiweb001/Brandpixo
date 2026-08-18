@@ -15,8 +15,8 @@ export default function FAQ() {
     <section className={styles.faq} id="faq">
       <div className={styles.header}>
         <span className={styles.tag}>Good questions, clear answers</span>
-        <h2 className={styles.title}>Before we begin.</h2>
-        <p>A few useful answers about working with BrandPixo, from timelines and technology to SEO and ongoing ownership.</p>
+        <h2 className={styles.title}>Before we begin, here’s what clients usually ask.</h2>
+        <p>A quick overview of timelines, technology, SEO, and how we work so you can move forward with clarity.</p>
       </div>
 
       <div className={styles.list}>
