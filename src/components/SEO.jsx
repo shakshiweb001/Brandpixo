@@ -45,6 +45,18 @@ const staticMeta = {
   '/terms-and-conditions': {
     title: 'Terms and Conditions | BrandPixo',
     description: 'Read the terms governing use of the BrandPixo website, its content, service enquiries and intellectual property.'
+  },
+  '/work/websites': {
+    title: 'Website Projects | BrandPixo',
+    description: 'Explore our latest website design and development projects.'
+  },
+  '/work/ecommerce': {
+    title: 'E-commerce Projects | BrandPixo',
+    description: 'Explore our latest e-commerce and online store projects.'
+  },
+  '/work/apps': {
+    title: 'Web App Projects | BrandPixo',
+    description: 'Explore our latest custom web application projects.'
   }
 };
 
@@ -101,7 +113,7 @@ const routeDetails = (pathname) => {
   }
 
   if (staticMeta[pathname]) {
-    const labels = { '/about': 'About', '/services': 'Services', '/blog': 'Blog', '/work': 'Work', '/contact': 'Contact', '/privacy-policy': 'Privacy Policy', '/terms-and-conditions': 'Terms and Conditions' };
+    const labels = { '/about': 'About', '/services': 'Services', '/blog': 'Blog', '/work': 'Work', '/work/websites': 'Websites', '/work/ecommerce': 'E-commerce', '/work/apps': 'Apps', '/contact': 'Contact', '/privacy-policy': 'Privacy Policy', '/terms-and-conditions': 'Terms and Conditions' };
     return {
       ...staticMeta[pathname],
       image: SHARE_IMAGE,
