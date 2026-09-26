@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { servicesData } from '../data/servicesData';
 import { blogPosts, getBlogPost } from '../data/blogPosts';
 import { homeFaqs } from '../data/homeFaqs';
+import { getProject } from '../data/projectsData';
 
 const SITE_NAME = 'BrandPixo';
 const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://brandpixo.com').replace(/\/$/, '');
@@ -47,7 +48,7 @@ const staticMeta = {
   }
 };
 
-const truncate = (value, max) => value.length <= max ? value : `${value.slice(0, max - 1).trimEnd()}…`;
+const truncate = (value, max) => value.length <= max ? value : `${value.slice(0, max - 1).trimEnd()}Ã¢â‚¬Â¦`;
 const titleWithBrand = (value) => truncate(`${value} | BrandPixo`, 59);
 const cleanPath = (pathname) => pathname !== '/' && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
 const articleWordCount = (post) => [
@@ -76,6 +77,17 @@ const routeDetails = (pathname) => {
     };
   }
 
+  if (pathname.startsWith('/work/')) {
+    const project = getProject(pathname.slice('/work/'.length));
+    if (project) return {
+      title: titleWithBrand(`${project.title} Case Study`),
+      description: truncate(project.intro, 155),
+      image: project.image,
+      type: 'website',
+      project,
+      breadcrumbs: [['Home', '/'], ['Work', '/work'], [project.title, pathname]]
+    };
+  }
   if (pathname.startsWith('/blog/')) {
     const post = getBlogPost(pathname.slice('/blog/'.length));
     if (post) return {
